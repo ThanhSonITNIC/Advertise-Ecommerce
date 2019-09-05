@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Auth::routes();
-
 // admin
 Route::prefix('admin')->middleware(['auth:api', 'levels:admin'])->group(function(){
     Route::apiResource('levels', 'LevelsController');
@@ -32,7 +30,8 @@ Route::prefix('account')->middleware(['auth:api', 'levels:customer'])->group(fun
     Route::apiResource('products', 'ProductsController');
     Route::apiResource('project-comments', 'ProjectCommmentsController');
     Route::apiResource('projects', 'ProjectsController');
-    Route::apiResource('users', 'UsersController');
+    // Route::apiResource('users', 'UsersController');
+    Route::get('profile', 'AccountsController@profile');
 });
 
 // guest
@@ -41,4 +40,9 @@ Route::prefix('/')->group(function(){
     Route::apiResource('post-types', 'PostTypesController');
     Route::apiResource('project-comments', 'ProjectCommentsController');
     Route::apiResource('projects', 'ProjectsController');
+
+    // register
+    // forgot password
+    // reset password
+    // verification 
 });

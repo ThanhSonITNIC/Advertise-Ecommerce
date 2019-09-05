@@ -19,7 +19,7 @@ class CreateProjectCommentsTable extends Migration
             $table->increments('id');
 			$table->unsignedInteger('id_project');
 			$table->string('content');
-			$table->string('id_creator', 15);
+			$table->unsignedInteger('id_creator');
 			$table->timestamps();
 			
 			$table->foreign('id_project')->references('id')->on('projects')->onUpdate('cascade')->onDelete('cascade');

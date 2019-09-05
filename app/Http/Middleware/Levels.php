@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class Levels
 {
@@ -17,7 +18,6 @@ class Levels
     {
         // check level access
         if(!in_array(Auth::user()->id_level, $levels)){
-            Auth::logout();
             return abort(403, 'Access denied');
         }
 

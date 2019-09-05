@@ -27,7 +27,7 @@ class CreateProjectsTable extends Migration
 			$table->date('start_at')->useCurrent();
 			$table->date('finished_at')->nullable();
 			$table->string('id_type', 30)->nullable();
-			$table->string('id_customer', 15)->nullable();
+			$table->unsignedInteger('id_customer')->nullable();
 			$table->text('tags')->nullable();
 			$table->timestamps();
 			

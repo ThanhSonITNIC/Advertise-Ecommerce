@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
 			$table->string('image')->nullable();
 			$table->text('description')->nullable();
 			$table->longText('content')->nullable();
-			$table->string('id_author', 15);
+			$table->unsignedInteger('id_author');
 			$table->string('id_type', 30)->nullable();
 			$table->boolean('highlight');
 			$table->integer('status')->default(1);

@@ -12,10 +12,10 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            ['id' => 'admin', 'name' => 'Administrator', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'Đà Nẵng', 'id_level' => 'admin'],
-            ['id' => 'admin2', 'name' => 'Administrator 2', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'Hà Nội', 'id_level' => 'admin'],
-            ['id' => 'customer', 'name' => 'Customer', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'Đà Nẵng', 'id_level' => 'customer'],
-            ['id' => 'customer2', 'name' => 'Customer 2', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'HCM', 'id_level' => 'customer'],
+            ['name' => 'Administrator', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'Đà Nẵng', 'id_level' => 'admin'],
+            ['name' => 'Administrator 2', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'Hà Nội', 'id_level' => 'admin'],
+            ['name' => 'Customer', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'Đà Nẵng', 'id_level' => 'customer'],
+            ['name' => 'Customer 2', 'password' => crypt('123456', 'wtf?'), 'email' => str_random(5).'@gmail.com', 'tel' => "+84".mt_rand(1000000000, 9999999999), 'address' => 'HCM', 'id_level' => 'customer'],
         ]);
     }
 }
