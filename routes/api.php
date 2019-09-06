@@ -19,8 +19,9 @@ Route::prefix('admin')->middleware(['auth:api', 'levels:admin'])->group(function
     Route::apiResource('posts', 'PostsController');
     Route::apiResource('post-types', 'PostTypesController');
     Route::apiResource('products', 'ProductsController');
-    Route::apiResource('project-comments', 'ProjectCommmentsController');
+    Route::apiResource('project-comments', 'ProjectCommentsController');
     Route::apiResource('projects', 'ProjectsController');
+    Route::apiResource('project-types', 'ProjectTypesController');
     Route::apiResource('units', 'UnitsController');
     Route::apiResource('users', 'UsersController');
 });
@@ -28,7 +29,7 @@ Route::prefix('admin')->middleware(['auth:api', 'levels:admin'])->group(function
 // account
 Route::prefix('account')->middleware(['auth:api', 'levels:customer', 'verified'])->group(function(){
     Route::apiResource('products', 'ProductsController');
-    Route::apiResource('project-comments', 'ProjectCommmentsController');
+    Route::apiResource('project-comments', 'ProjectCommentsController');
     Route::apiResource('projects', 'ProjectsController');
     Route::get('profile', 'AccountsController@profile');
     Route::put('profile', 'AccountsController@update');
