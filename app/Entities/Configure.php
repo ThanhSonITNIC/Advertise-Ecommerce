@@ -17,6 +17,8 @@ class Configure extends Model implements Transformable
 
     protected $table = 'configures';
 
+    protected $primaryKey = 'key';
+
     public $incrementing = false;
 
     public $timestamps = false;

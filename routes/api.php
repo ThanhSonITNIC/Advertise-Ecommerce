@@ -24,6 +24,7 @@ Route::prefix('admin')->middleware(['auth:api', 'levels:admin'])->group(function
     Route::apiResource('project-types', 'ProjectTypesController');
     Route::apiResource('units', 'UnitsController');
     Route::apiResource('users', 'UsersController');
+    Route::apiResource('configures', 'ConfiguresController');
 });
 
 // account
