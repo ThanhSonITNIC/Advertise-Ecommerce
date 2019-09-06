@@ -3,7 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Mails\Auth\MailRegister;
+use Mail;
+use App\Http\Requests;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
+use App\Http\Requests\VerifyEmailRequest;
+use App\Http\Requests\SendVerifyEmailRequest;
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\URL;
 
 class VerificationController extends Controller
 {
@@ -21,21 +32,94 @@ class VerificationController extends Controller
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
-     *
-     * @var string
+     * @var UserRepository
      */
-    protected $redirectTo = '/home';
+    protected $repository;
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var UserValidator
      */
-    public function __construct()
+    protected $validator;
+
+    /**
+     * PasswordResetsController constructor.
+     *
+     * @param UserRepository $repository
+     * @param UserValidator $validator
+     */
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
-        $this->middleware('auth');
         $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $this->middleware('throttle:10,1')->only('verify', 'resend');
+
+        $this->repository = $repository;
+        $this->validator  = $validator;
     }
+
+    /**
+     * Send mail to verify
+     * 
+     * @param SendVerifyEmailRequest $request
+     */
+    public function resend(SendVerifyEmailRequest $request){
+        try {
+            // validator
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            // create url
+            $url = Url::temporarySignedRoute('verification.verify', now()->addHour(), ['email' => $request->email]);
+
+            // send
+            Mail::to($request->email)->send(new MailRegister($url));
+
+            $response = [
+                'message' => 'Sent! Please check your mail',
+                'email'    => $request->email,
+            ];
+
+            if ($request->wantsJson()) {
+
+                return response()->json($response);
+            }
+
+        } catch (ValidatorException $e) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Verify email
+     * 
+     * @param VerifyEmailRequest $request
+     */
+    public function verify(VerifyEmailRequest $request){
+        try {
+            // validator
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            
+            // verify
+            $user = $this->repository->verify($request->email);
+
+            $response = [
+                'message' => 'Email Verified',
+                'data'    => $user->toArray(),
+            ];
+
+            return response()->json($response);
+
+        } catch (ValidatorException $e) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+        }
+    }
+
 }

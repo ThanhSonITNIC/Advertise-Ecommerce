@@ -2,71 +2,80 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
+use App\Http\Requests\UserCreateRequest;
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
+use App\Mails\Auth\MailRegister;
+use Mail;
+use Hash;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
+    /**
+     * @var UserRepository
+     */
+    protected $repository;
 
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
+     * @var UserValidator
      */
-    protected $redirectTo = '/home';
+    protected $validator;
 
     /**
-     * Create a new controller instance.
+     * UsersController constructor.
      *
-     * @return void
+     * @param UserRepository $repository
+     * @param UserValidator $validator
      */
-    public function __construct()
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
-        $this->middleware('guest');
+        $this->repository = $repository;
+        $this->validator  = $validator;
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * Register user
+     * 
+     * @param UserCreateRequest $request
+     * @return redirect to send maill verify
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+    public function register(UserCreateRequest $request){
+        try {
+            // update request
+            $request->request->add([
+                'id_level' => 'customer',
+                'password' => Hash::make($request->password),    
+            ]);
+
+            // validator
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            // create
+            $user = $this->repository->create($request->all());
+
+            $response = [
+                'message' => 'User created.',
+                'data'    => $user->toArray(),
+            ];
+
+            if ($request->wantsJson()) {
+
+                return response()->json($response);
+            }
+
+        } catch (ValidatorException $e) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+        }
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
 }

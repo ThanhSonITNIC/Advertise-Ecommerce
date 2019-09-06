@@ -11,5 +11,12 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface UserRepository extends RepositoryInterface
 {
-    //
+    /**
+     * Verify email
+     * 
+     * @param $email
+     * 
+     * @return mixed
+     */
+    public function verify($email);
 }

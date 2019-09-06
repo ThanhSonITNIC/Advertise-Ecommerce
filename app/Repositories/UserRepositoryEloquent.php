@@ -44,5 +44,18 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * Verify email
+     * 
+     * @param $email
+     * 
+     * @return mixed
+     */
+    public function verify($email){
+        $user = $this->findByField('email', $email)->first();
+        $user->markEmailAsVerified();
+        return $user;
+    }
     
 }

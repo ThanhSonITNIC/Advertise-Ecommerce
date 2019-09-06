@@ -5,6 +5,8 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -15,10 +17,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *
  * @package namespace App\Entities;
  */
-class User extends Authenticatable implements Transformable
+class User extends Authenticatable implements Transformable, MustVerifyEmail, CanResetPassword
 {
     use TransformableTrait;
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, CanResetPasswordTrait;
 
     protected $table = 'users';
 
@@ -30,7 +32,7 @@ class User extends Authenticatable implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'email', 'tel', 'address', 'provider', 'id_provider', 'id_level', 'status'];
+    protected $fillable = ['id', 'name', 'email', 'tel', 'address', 'provider', 'id_provider', 'id_level', 'status', 'password'];
 
     /**
      * The attributes that should be hidden for arrays.

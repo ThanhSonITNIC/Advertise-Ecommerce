@@ -26,12 +26,12 @@ Route::prefix('admin')->middleware(['auth:api', 'levels:admin'])->group(function
 });
 
 // account
-Route::prefix('account')->middleware(['auth:api', 'levels:customer'])->group(function(){
+Route::prefix('account')->middleware(['auth:api', 'levels:customer', 'verified'])->group(function(){
     Route::apiResource('products', 'ProductsController');
     Route::apiResource('project-comments', 'ProjectCommmentsController');
     Route::apiResource('projects', 'ProjectsController');
-    // Route::apiResource('users', 'UsersController');
     Route::get('profile', 'AccountsController@profile');
+    Route::put('profile', 'AccountsController@update');
 });
 
 // guest
@@ -42,7 +42,20 @@ Route::prefix('/')->group(function(){
     Route::apiResource('projects', 'ProjectsController');
 
     // register
-    // forgot password
+    Route::post('register', 'Auth\RegisterController@register');
+
     // reset password
+    // - send link reset
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    // - link reset to
+    Route::get('password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    // - reset
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
     // verification 
+    // - resend
+    Route::get('verify/resend', 'Auth\VerificationController@resend');
+    // - verify
+    // Route::get('verify/{email}', 'Auth\VerificationController@verify')->name('verification.verify');
+    Route::get('verify', 'Auth\VerificationController@verify')->name('verification.verify');
 });
