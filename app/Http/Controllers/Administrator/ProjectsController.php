@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\PostCreateRequest;
-use App\Http\Requests\PostUpdateRequest;
-use App\Repositories\PostRepository;
-use App\Validators\PostValidator;
+use App\Http\Requests\ProjectCreateRequest;
+use App\Http\Requests\ProjectUpdateRequest;
+use App\Repositories\ProjectRepository;
+use App\Validators\ProjectValidator;
 
 /**
- * Class PostsController.
+ * Class ProjectsController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Administrator;
  */
-class PostsController extends Controller
+class ProjectsController extends Controller
 {
     /**
-     * @var PostRepository
+     * @var ProjectRepository
      */
     protected $repository;
 
     /**
-     * @var PostValidator
+     * @var ProjectValidator
      */
     protected $validator;
 
     /**
-     * PostsController constructor.
+     * ProjectsController constructor.
      *
-     * @param PostRepository $repository
-     * @param PostValidator $validator
+     * @param ProjectRepository $repository
+     * @param ProjectValidator $validator
      */
-    public function __construct(PostRepository $repository, PostValidator $validator)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class PostsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $posts = $this->repository->all();
+        $projects = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $posts,
+                'data' => $projects,
             ]);
         }
 
-        return view('posts.index', compact('posts'));
+        return view('projects.index', compact('projects'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  PostCreateRequest $request
+     * @param  ProjectCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(PostCreateRequest $request)
+    public function store(ProjectCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $post = $this->repository->create($request->all());
+            $project = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Post created.',
-                'data'    => $post->toArray(),
+                'message' => 'Project created.',
+                'data'    => $project->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = $this->repository->find($id);
+        $project = $this->repository->with(['products', 'comments'])->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $post,
+                'data' => $project,
             ]);
         }
 
-        return view('posts.show', compact('post'));
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -131,32 +131,32 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = $this->repository->find($id);
+        $project = $this->repository->find($id);
 
-        return view('posts.edit', compact('post'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  PostUpdateRequest $request
+     * @param  ProjectUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(PostUpdateRequest $request, $id)
+    public function update(ProjectUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $post = $this->repository->update($request->all(), $id);
+            $project = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Post updated.',
-                'data'    => $post->toArray(),
+                'message' => 'Project updated.',
+                'data'    => $project->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class PostsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Post deleted.',
+                'message' => 'Project deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Post deleted.');
+        return redirect()->back()->with('message', 'Project deleted.');
     }
 }

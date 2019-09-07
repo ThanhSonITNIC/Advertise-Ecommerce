@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ProjectCommentCreateRequest;
-use App\Http\Requests\ProjectCommentUpdateRequest;
-use App\Repositories\ProjectCommentRepository;
-use App\Validators\ProjectCommentValidator;
+use App\Http\Requests\ConfigureCreateRequest;
+use App\Http\Requests\ConfigureUpdateRequest;
+use App\Repositories\ConfigureRepository;
+use App\Validators\ConfigureValidator;
 
 /**
- * Class ProjectCommentsController.
+ * Class ConfiguresController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Administrator;
  */
-class ProjectCommentsController extends Controller
+class ConfiguresController extends Controller
 {
     /**
-     * @var ProjectCommentRepository
+     * @var ConfigureRepository
      */
     protected $repository;
 
     /**
-     * @var ProjectCommentValidator
+     * @var ConfigureValidator
      */
     protected $validator;
 
     /**
-     * ProjectCommentsController constructor.
+     * ConfiguresController constructor.
      *
-     * @param ProjectCommentRepository $repository
-     * @param ProjectCommentValidator $validator
+     * @param ConfigureRepository $repository
+     * @param ConfigureValidator $validator
      */
-    public function __construct(ProjectCommentRepository $repository, ProjectCommentValidator $validator)
+    public function __construct(ConfigureRepository $repository, ConfigureValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class ProjectCommentsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $projectComments = $this->repository->all();
+        $configures = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $projectComments,
+                'data' => $configures,
             ]);
         }
 
-        return view('projectComments.index', compact('projectComments'));
+        return view('configures.index', compact('configures'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProjectCommentCreateRequest $request
+     * @param  ConfigureCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProjectCommentCreateRequest $request)
+    public function store(ConfigureCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $projectComment = $this->repository->create($request->all());
+            $configure = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'ProjectComment created.',
-                'data'    => $projectComment->toArray(),
+                'message' => 'Configure created.',
+                'data'    => $configure->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class ProjectCommentsController extends Controller
      */
     public function show($id)
     {
-        $projectComment = $this->repository->find($id);
+        $configure = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $projectComment,
+                'data' => $configure,
             ]);
         }
 
-        return view('projectComments.show', compact('projectComment'));
+        return view('configures.show', compact('configure'));
     }
 
     /**
@@ -131,32 +131,32 @@ class ProjectCommentsController extends Controller
      */
     public function edit($id)
     {
-        $projectComment = $this->repository->find($id);
+        $configure = $this->repository->find($id);
 
-        return view('projectComments.edit', compact('projectComment'));
+        return view('configures.edit', compact('configure'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProjectCommentUpdateRequest $request
+     * @param  ConfigureUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ProjectCommentUpdateRequest $request, $id)
+    public function update(ConfigureUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $projectComment = $this->repository->update($request->all(), $id);
+            $configure = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'ProjectComment updated.',
-                'data'    => $projectComment->toArray(),
+                'message' => 'Configure updated.',
+                'data'    => $configure->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class ProjectCommentsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'ProjectComment deleted.',
+                'message' => 'Configure deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'ProjectComment deleted.');
+        return redirect()->back()->with('message', 'Configure deleted.');
     }
 }

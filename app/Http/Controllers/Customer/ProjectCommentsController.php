@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ProductCreateRequest;
-use App\Http\Requests\ProductUpdateRequest;
-use App\Repositories\ProductRepository;
-use App\Validators\ProductValidator;
+use App\Http\Requests\ProjectCommentCreateRequest;
+use App\Http\Requests\ProjectCommentUpdateRequest;
+use App\Repositories\ProjectCommentRepository;
+use App\Validators\ProjectCommentValidator;
 
 /**
- * Class ProductsController.
+ * Class ProjectCommentsController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Customer;
  */
-class ProductsController extends Controller
+class ProjectCommentsController extends Controller
 {
     /**
-     * @var ProductRepository
+     * @var ProjectCommentRepository
      */
     protected $repository;
 
     /**
-     * @var ProductValidator
+     * @var ProjectCommentValidator
      */
     protected $validator;
 
     /**
-     * ProductsController constructor.
+     * ProjectCommentsController constructor.
      *
-     * @param ProductRepository $repository
-     * @param ProductValidator $validator
+     * @param ProjectCommentRepository $repository
+     * @param ProjectCommentValidator $validator
      */
-    public function __construct(ProductRepository $repository, ProductValidator $validator)
+    public function __construct(ProjectCommentRepository $repository, ProjectCommentValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,40 @@ class ProductsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $products = $this->repository->all();
+        $projectComments = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $products,
+                'data' => $projectComments,
             ]);
         }
 
-        return view('products.index', compact('products'));
+        return view('projectComments.index', compact('projectComments'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductCreateRequest $request
+     * @param  ProjectCommentCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProductCreateRequest $request)
+    public function store(ProjectCommentCreateRequest $request)
     {
         try {
+            // update request
+            $request->request->add(['id_creator' => \Auth::id()]);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $product = $this->repository->create($request->all());
+            $projectComment = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Product created.',
-                'data'    => $product->toArray(),
+                'message' => 'ProjectComment created.',
+                'data'    => $projectComment->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +112,16 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = $this->repository->find($id);
+        $projectComment = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $product,
+                'data' => $projectComment,
             ]);
         }
 
-        return view('products.show', compact('product'));
+        return view('projectComments.show', compact('projectComment'));
     }
 
     /**
@@ -131,32 +133,32 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->repository->find($id);
+        $projectComment = $this->repository->find($id);
 
-        return view('products.edit', compact('product'));
+        return view('projectComments.edit', compact('projectComment'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProductUpdateRequest $request
+     * @param  ProjectCommentUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ProductUpdateRequest $request, $id)
+    public function update(ProjectCommentUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $product = $this->repository->update($request->all(), $id);
+            $projectComment = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Product updated.',
-                'data'    => $product->toArray(),
+                'message' => 'ProjectComment updated.',
+                'data'    => $projectComment->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +196,11 @@ class ProductsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Product deleted.',
+                'message' => 'ProjectComment deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Product deleted.');
+        return redirect()->back()->with('message', 'ProjectComment deleted.');
     }
 }

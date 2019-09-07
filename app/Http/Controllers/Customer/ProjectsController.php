@@ -1,44 +1,47 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ConfigureCreateRequest;
-use App\Http\Requests\ConfigureUpdateRequest;
-use App\Repositories\ConfigureRepository;
-use App\Validators\ConfigureValidator;
+use App\Http\Requests\ProjectCreateRequest;
+use App\Http\Requests\ProjectUpdateRequest;
+use App\Repositories\ProjectRepository;
+use App\Validators\ProjectValidator;
+use App\Criteria\Customer\ProjectCriteria;
 
 /**
- * Class ConfiguresController.
+ * Class ProjectsController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Customer;
  */
-class ConfiguresController extends Controller
+class ProjectsController extends Controller
 {
     /**
-     * @var ConfigureRepository
+     * @var ProjectRepository
      */
     protected $repository;
 
     /**
-     * @var ConfigureValidator
+     * @var ProjectValidator
      */
     protected $validator;
 
     /**
-     * ConfiguresController constructor.
+     * ProjectsController constructor.
      *
-     * @param ConfigureRepository $repository
-     * @param ConfigureValidator $validator
+     * @param ProjectRepository $repository
+     * @param ProjectValidator $validator
      */
-    public function __construct(ConfigureRepository $repository, ConfigureValidator $validator)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        
+        $this->repository->pushCriteria(ProjectCriteria::class);
     }
 
     /**
@@ -49,38 +52,38 @@ class ConfiguresController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $configures = $this->repository->all();
+        $projects = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $configures,
+                'data' => $projects,
             ]);
         }
 
-        return view('configures.index', compact('configures'));
+        return view('projects.index', compact('projects'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ConfigureCreateRequest $request
+     * @param  ProjectCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ConfigureCreateRequest $request)
+    public function store(ProjectCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $configure = $this->repository->create($request->all());
+            $project = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Configure created.',
-                'data'    => $configure->toArray(),
+                'message' => 'Project created.',
+                'data'    => $project->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +113,16 @@ class ConfiguresController extends Controller
      */
     public function show($id)
     {
-        $configure = $this->repository->find($id);
+        $project = $this->repository->with(['products', 'comments'])->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $configure,
+                'data' => $project,
             ]);
         }
 
-        return view('configures.show', compact('configure'));
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -131,32 +134,32 @@ class ConfiguresController extends Controller
      */
     public function edit($id)
     {
-        $configure = $this->repository->find($id);
+        $project = $this->repository->find($id);
 
-        return view('configures.edit', compact('configure'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ConfigureUpdateRequest $request
+     * @param  ProjectUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ConfigureUpdateRequest $request, $id)
+    public function update(ProjectUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $configure = $this->repository->update($request->all(), $id);
+            $project = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Configure updated.',
-                'data'    => $configure->toArray(),
+                'message' => 'Project updated.',
+                'data'    => $project->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +197,11 @@ class ConfiguresController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Configure deleted.',
+                'message' => 'Project deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Configure deleted.');
+        return redirect()->back()->with('message', 'Project deleted.');
     }
 }

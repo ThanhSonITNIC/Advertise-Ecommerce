@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ProjectTypeCreateRequest;
-use App\Http\Requests\ProjectTypeUpdateRequest;
-use App\Repositories\ProjectTypeRepository;
-use App\Validators\ProjectTypeValidator;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
 
 /**
- * Class ProjectTypesController.
+ * Class UsersController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Administrator;
  */
-class ProjectTypesController extends Controller
+class UsersController extends Controller
 {
     /**
-     * @var ProjectTypeRepository
+     * @var UserRepository
      */
     protected $repository;
 
     /**
-     * @var ProjectTypeValidator
+     * @var UserValidator
      */
     protected $validator;
 
     /**
-     * ProjectTypesController constructor.
+     * UsersController constructor.
      *
-     * @param ProjectTypeRepository $repository
-     * @param ProjectTypeValidator $validator
+     * @param UserRepository $repository
+     * @param UserValidator $validator
      */
-    public function __construct(ProjectTypeRepository $repository, ProjectTypeValidator $validator)
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class ProjectTypesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $projectTypes = $this->repository->all();
+        $users = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $projectTypes,
+                'data' => $users,
             ]);
         }
 
-        return view('projectTypes.index', compact('projectTypes'));
+        return view('users.index', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProjectTypeCreateRequest $request
+     * @param  UserCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProjectTypeCreateRequest $request)
+    public function store(UserCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $projectType = $this->repository->create($request->all());
+            $user = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'ProjectType created.',
-                'data'    => $projectType->toArray(),
+                'message' => 'User created.',
+                'data'    => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class ProjectTypesController extends Controller
      */
     public function show($id)
     {
-        $projectType = $this->repository->find($id);
+        $user = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $projectType,
+                'data' => $user,
             ]);
         }
 
-        return view('projectTypes.show', compact('projectType'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -131,32 +131,32 @@ class ProjectTypesController extends Controller
      */
     public function edit($id)
     {
-        $projectType = $this->repository->find($id);
+        $user = $this->repository->find($id);
 
-        return view('projectTypes.edit', compact('projectType'));
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProjectTypeUpdateRequest $request
+     * @param  UserUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ProjectTypeUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $projectType = $this->repository->update($request->all(), $id);
+            $user = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'ProjectType updated.',
-                'data'    => $projectType->toArray(),
+                'message' => 'User updated.',
+                'data'    => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class ProjectTypesController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'ProjectType deleted.',
+                'message' => 'User deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'ProjectType deleted.');
+        return redirect()->back()->with('message', 'User deleted.');
     }
 }

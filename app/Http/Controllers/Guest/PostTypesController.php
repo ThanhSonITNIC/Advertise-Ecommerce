@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -15,7 +15,7 @@ use App\Validators\PostTypeValidator;
 /**
  * Class PostTypesController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Guest;
  */
 class PostTypesController extends Controller
 {

@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UnitCreateRequest;
-use App\Http\Requests\UnitUpdateRequest;
-use App\Repositories\UnitRepository;
-use App\Validators\UnitValidator;
+use App\Http\Requests\ProjectCreateRequest;
+use App\Http\Requests\ProjectUpdateRequest;
+use App\Repositories\ProjectRepository;
+use App\Validators\ProjectValidator;
 
 /**
- * Class UnitsController.
+ * Class ProjectsController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Guest;
  */
-class UnitsController extends Controller
+class ProjectsController extends Controller
 {
     /**
-     * @var UnitRepository
+     * @var ProjectRepository
      */
     protected $repository;
 
     /**
-     * @var UnitValidator
+     * @var ProjectValidator
      */
     protected $validator;
 
     /**
-     * UnitsController constructor.
+     * ProjectsController constructor.
      *
-     * @param UnitRepository $repository
-     * @param UnitValidator $validator
+     * @param ProjectRepository $repository
+     * @param ProjectValidator $validator
      */
-    public function __construct(UnitRepository $repository, UnitValidator $validator)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class UnitsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $units = $this->repository->all();
+        $projects = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $units,
+                'data' => $projects,
             ]);
         }
 
-        return view('units.index', compact('units'));
+        return view('projects.index', compact('projects'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UnitCreateRequest $request
+     * @param  ProjectCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UnitCreateRequest $request)
+    public function store(ProjectCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $unit = $this->repository->create($request->all());
+            $project = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Unit created.',
-                'data'    => $unit->toArray(),
+                'message' => 'Project created.',
+                'data'    => $project->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class UnitsController extends Controller
      */
     public function show($id)
     {
-        $unit = $this->repository->find($id);
+        $project = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $unit,
+                'data' => $project,
             ]);
         }
 
-        return view('units.show', compact('unit'));
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -131,32 +131,32 @@ class UnitsController extends Controller
      */
     public function edit($id)
     {
-        $unit = $this->repository->find($id);
+        $project = $this->repository->find($id);
 
-        return view('units.edit', compact('unit'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UnitUpdateRequest $request
+     * @param  ProjectUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UnitUpdateRequest $request, $id)
+    public function update(ProjectUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $unit = $this->repository->update($request->all(), $id);
+            $project = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Unit updated.',
-                'data'    => $unit->toArray(),
+                'message' => 'Project updated.',
+                'data'    => $project->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class UnitsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Unit deleted.',
+                'message' => 'Project deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Unit deleted.');
+        return redirect()->back()->with('message', 'Project deleted.');
     }
 }

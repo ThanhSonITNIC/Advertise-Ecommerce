@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\LevelCreateRequest;
-use App\Http\Requests\LevelUpdateRequest;
-use App\Repositories\LevelRepository;
-use App\Validators\LevelValidator;
+use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
+use App\Repositories\PostRepository;
+use App\Validators\PostValidator;
 
 /**
- * Class LevelsController.
+ * Class PostsController.
  *
- * @package namespace App\Http\Controllers;
+ * @package namespace App\Http\Controllers\Administrator;
  */
-class LevelsController extends Controller
+class PostsController extends Controller
 {
     /**
-     * @var LevelRepository
+     * @var PostRepository
      */
     protected $repository;
 
     /**
-     * @var LevelValidator
+     * @var PostValidator
      */
     protected $validator;
 
     /**
-     * LevelsController constructor.
+     * PostsController constructor.
      *
-     * @param LevelRepository $repository
-     * @param LevelValidator $validator
+     * @param PostRepository $repository
+     * @param PostValidator $validator
      */
-    public function __construct(LevelRepository $repository, LevelValidator $validator)
+    public function __construct(PostRepository $repository, PostValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,40 @@ class LevelsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $levels = $this->repository->all();
+        $posts = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $levels,
+                'data' => $posts,
             ]);
         }
 
-        return view('levels.index', compact('levels'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  LevelCreateRequest $request
+     * @param  PostCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(LevelCreateRequest $request)
+    public function store(PostCreateRequest $request)
     {
         try {
+            // update request
+            $request->request->add(['id_author' => \Auth::id()]);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $level = $this->repository->create($request->all());
+            $post = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Level created.',
-                'data'    => $level->toArray(),
+                'message' => 'Post created.',
+                'data'    => $post->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +112,16 @@ class LevelsController extends Controller
      */
     public function show($id)
     {
-        $level = $this->repository->find($id);
+        $post = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $level,
+                'data' => $post,
             ]);
         }
 
-        return view('levels.show', compact('level'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -131,32 +133,32 @@ class LevelsController extends Controller
      */
     public function edit($id)
     {
-        $level = $this->repository->find($id);
+        $post = $this->repository->find($id);
 
-        return view('levels.edit', compact('level'));
+        return view('posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  LevelUpdateRequest $request
+     * @param  PostUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(LevelUpdateRequest $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $level = $this->repository->update($request->all(), $id);
+            $post = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Level updated.',
-                'data'    => $level->toArray(),
+                'message' => 'Post updated.',
+                'data'    => $post->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +196,11 @@ class LevelsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Level deleted.',
+                'message' => 'Post deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Level deleted.');
+        return redirect()->back()->with('message', 'Post deleted.');
     }
 }

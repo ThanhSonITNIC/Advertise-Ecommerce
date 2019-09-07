@@ -31,4 +31,12 @@ class Project extends Model implements Transformable
     public function customer(){
         return $this->belongTo('App\Entities\User', 'id_customer');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Entities\ProjectComment', 'id_project');
+    }
+
+    public function products(){
+        return $this->hasMany('App\Entities\Product', 'id_project');
+    }
 }
