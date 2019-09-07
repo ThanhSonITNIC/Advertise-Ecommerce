@@ -24,11 +24,12 @@ class CreateProjectsTable extends Migration
 			$table->string('customer')->nullable();
 			$table->decimal('price', 18, 3)->default(0);
 			$table->boolean('highlight');
-			$table->date('start_at')->useCurrent();
+			$table->date('start_at')->nullable();
 			$table->date('finished_at')->nullable();
 			$table->string('id_type', 30)->nullable();
 			$table->unsignedInteger('id_customer')->nullable();
 			$table->text('tags')->nullable();
+			$table->smallInteger('rate')->nullable();
 			$table->timestamps();
 			
 			$table->foreign('id_type')->references('id')->on('project_types')->onUpdate('cascade')->onDelete('cascade');

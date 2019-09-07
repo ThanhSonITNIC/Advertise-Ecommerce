@@ -26,7 +26,7 @@ class Product extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'price', 'quantity', 'description', 'id_unit', 'id_project'];
+    protected $fillable = ['code', 'name', 'price', 'quantity', 'description', 'id_unit', 'id_project'];
 
     public function unit(){
         return $this->belongTo('App\Entities\Unit', 'id_unit');

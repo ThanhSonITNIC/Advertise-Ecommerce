@@ -58,6 +58,5 @@ Route::prefix('/')->group(function(){
     // - resend
     Route::get('verify/resend', 'Auth\VerificationController@resend');
     // - verify
-    // Route::get('verify/{email}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('verify', 'Auth\VerificationController@verify')->name('verification.verify');
 });
