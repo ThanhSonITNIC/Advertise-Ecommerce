@@ -7,6 +7,25 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Vuetify from 'vuetify';
+
+import Routes from '@/js/routes.js';
+
+import App from '@/js/views/App';
+
+// Vue.use(Vuetify)
+
+// const routes = [
+//     { path: '/', component: require('./components/Home.vue').default },
+//     { path: '/post', component: require('./components/Post.vue').default },
+
+//     { path: '/admin', component: require('./components/Admin.vue').default }
+// ]
+
+// const router = new VueRouter({ 
+//     routes,
+//     mode: 'history'
+// })
 
 /**
  * The following block of code may be used to automatically register your
@@ -16,10 +35,10 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +46,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// const app = new Vue({
+//     el: '#app',
+//     router: Routes,
+//     render: h => h(App),
+// });
+
 const app = new Vue({
-    el: '#app',
-});
+    Vuetify,
+    router: Routes
+}).$mount('#app');
+
+
+export default app;

@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('{all}', function () {
+    return view('app');
+})
+->where(['all' => '.*']);
 
-Auth::routes();
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
