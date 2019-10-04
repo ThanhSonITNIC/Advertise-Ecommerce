@@ -7,35 +7,35 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ProductCreateRequest;
-use App\Http\Requests\ProductUpdateRequest;
-use App\Repositories\ProductRepository;
-use App\Validators\ProductValidator;
+use App\Http\Requests\MaterialCreateRequest;
+use App\Http\Requests\MaterialUpdateRequest;
+use App\Repositories\MaterialRepository;
+use App\Validators\MaterialValidator;
 
 /**
- * Class ProductsController.
+ * Class MaterialsController.
  *
  * @package namespace App\Http\Controllers\Administrator;
  */
-class ProductsController extends Controller
+class MaterialsController extends Controller
 {
     /**
-     * @var ProductRepository
+     * @var MaterialRepository
      */
     protected $repository;
 
     /**
-     * @var ProductValidator
+     * @var MaterialValidator
      */
     protected $validator;
 
     /**
-     * ProductsController constructor.
+     * MaterialsController constructor.
      *
-     * @param ProductRepository $repository
-     * @param ProductValidator $validator
+     * @param MaterialRepository $repository
+     * @param MaterialValidator $validator
      */
-    public function __construct(ProductRepository $repository, ProductValidator $validator)
+    public function __construct(MaterialRepository $repository, MaterialValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class ProductsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $products = $this->repository->all();
+        $materials = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $products,
+                'data' => $materials,
             ]);
         }
 
-        return view('products.index', compact('products'));
+        return view('materials.index', compact('materials'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductCreateRequest $request
+     * @param  MaterialCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProductCreateRequest $request)
+    public function store(MaterialCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $product = $this->repository->create($request->all());
+            $material = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Product created.',
-                'data'    => $product->toArray(),
+                'message' => 'Material created.',
+                'data'    => $material->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = $this->repository->find($id);
+        $material = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $product,
+                'data' => $material,
             ]);
         }
 
-        return view('products.show', compact('product'));
+        return view('materials.show', compact('material'));
     }
 
     /**
@@ -131,32 +131,32 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->repository->find($id);
+        $material = $this->repository->find($id);
 
-        return view('products.edit', compact('product'));
+        return view('materials.edit', compact('material'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProductUpdateRequest $request
+     * @param  MaterialUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ProductUpdateRequest $request, $id)
+    public function update(MaterialUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $product = $this->repository->update($request->all(), $id);
+            $material = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Product updated.',
-                'data'    => $product->toArray(),
+                'message' => 'Material updated.',
+                'data'    => $material->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class ProductsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Product deleted.',
+                'message' => 'Material deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Product deleted.');
+        return redirect()->back()->with('message', 'Material deleted.');
     }
 }

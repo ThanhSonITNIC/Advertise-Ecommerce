@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateProductsTable.
+ * Class CreateMaterialsTable.
  */
-class CreateProductsTable extends Migration
+class CreateMaterialsTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,8 +15,8 @@ class CreateProductsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('products', function(Blueprint $table) {
-			$table->increments('id');
+		Schema::create('materials', function(Blueprint $table) {
+            $table->increments('id');
 			$table->string('code', 30);
 			$table->string('name');
 			$table->decimal('price', 18, 3)->default(0);
@@ -37,6 +37,6 @@ class CreateProductsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('products');
+		Schema::drop('materials');
 	}
 }

@@ -3,23 +3,23 @@
 namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Entities\Product;
+use App\Entities\Material;
 
 /**
- * Class ProductTransformer.
+ * Class MaterialTransformer.
  *
  * @package namespace App\Transformers;
  */
-class ProductTransformer extends TransformerAbstract
+class MaterialTransformer extends TransformerAbstract
 {
     /**
-     * Transform the Product entity.
+     * Transform the Material entity.
      *
-     * @param \App\Entities\Product $model
+     * @param \App\Entities\Material $model
      *
      * @return array
      */
-    public function transform(Product $model)
+    public function transform(Material $model)
     {
         return [
             'id'         => (int) $model->id,

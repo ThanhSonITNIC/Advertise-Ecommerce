@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ProductRepository;
-use App\Entities\Product;
-use App\Validators\ProductValidator;
+use App\Repositories\MaterialRepository;
+use App\Entities\Material;
+use App\Validators\MaterialValidator;
 
 /**
- * Class ProductRepositoryEloquent.
+ * Class MaterialRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class MaterialRepositoryEloquent extends BaseRepository implements MaterialRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function model()
     {
-        return Product::class;
+        return Material::class;
     }
 
     /**
@@ -33,7 +33,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function validator()
     {
 
-        return ProductValidator::class;
+        return MaterialValidator::class;
     }
 
 

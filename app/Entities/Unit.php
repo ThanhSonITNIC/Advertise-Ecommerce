@@ -28,8 +28,8 @@ class Unit extends Model implements Transformable
      */
     protected $fillable = ['id', 'name'];
 
-    public function products(){
-        return $this->hasMany('App\Entities\Product', 'id_unit');
+    public function materials(){
+        return $this->hasMany('App\Entities\Material', 'id_unit');
     }
 
 }

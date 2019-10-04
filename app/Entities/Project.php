@@ -36,7 +36,7 @@ class Project extends Model implements Transformable
         return $this->hasMany('App\Entities\ProjectComment', 'id_project');
     }
 
-    public function products(){
-        return $this->hasMany('App\Entities\Product', 'id_project');
+    public function materials(){
+        return $this->hasMany('App\Entities\Material', 'id_project');
     }
 }

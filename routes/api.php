@@ -18,7 +18,7 @@ Route::prefix('admin')->namespace('Administrator')->middleware(['auth:api', 'lev
     Route::apiResource('levels', 'LevelsController');
     Route::apiResource('posts', 'PostsController');
     Route::apiResource('post-types', 'PostTypesController');
-    Route::apiResource('products', 'ProductsController');
+    Route::apiResource('materials', 'MaterialsController');
     Route::apiResource('project-comments', 'ProjectCommentsController');
     Route::apiResource('projects', 'ProjectsController');
     Route::apiResource('project-types', 'ProjectTypesController');

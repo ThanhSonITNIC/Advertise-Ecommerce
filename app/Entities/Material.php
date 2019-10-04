@@ -7,15 +7,15 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Product.
+ * Class Material.
  *
  * @package namespace App\Entities;
  */
-class Product extends Model implements Transformable
+class Material extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'products';
+    protected $table = 'materials';
 
     public $incrementing = false;
 
@@ -35,5 +35,4 @@ class Product extends Model implements Transformable
     public function project(){
         return $this->belongTo('App\Entities\Project', 'id_project');
     }
-
 }

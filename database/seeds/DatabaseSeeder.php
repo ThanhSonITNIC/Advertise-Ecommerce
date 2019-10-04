@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(\UnitTableSeeder::class);
 
         $this->call(\ProjectTableSeeder::class);
-        $this->call(\ProductTableSeeder::class);
+        $this->call(\MaterialTableSeeder::class);
         $this->call(\ProjectCommentTableSeeder::class);
     }
 }
