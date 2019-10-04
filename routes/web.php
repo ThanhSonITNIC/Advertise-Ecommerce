@@ -11,10 +11,10 @@
 |
 */
 
-Route::any('{all}', function () {
-    return view('app');
-})
-->where(['all' => '.*']);
+// Route::any('{all}', function () {
+//     return view('app');
+// })
+// ->where(['all' => '.*']);
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,4 +22,17 @@ Route::any('{all}', function () {
 
 // Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
+    Route::get('', 'HomeController@index')->name('home');
+
+    Route::get('about', 'AboutController@index')->name('about');
+
+    Route::get('contact', 'ContactController@index')->name('contact');
+    
+    Route::get('news', 'NewsController@index')->name('news');
+    Route::get('news/{id}', 'NewsController@show')->name('news.show');
+
+    Route::get('projects', 'ProjectsController@index')->name('projects');
+    Route::get('projects/{id}', 'ProjectsController@show')->name('projects.show');
+    
+});

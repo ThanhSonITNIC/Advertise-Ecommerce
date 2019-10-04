@@ -58,7 +58,7 @@ class ProjectsController extends Controller
             ]);
         }
 
-        return view('projects.index', compact('projects'));
+        return view('front.projects.index', compact('projects'));
     }
 
     /**
@@ -119,7 +119,7 @@ class ProjectsController extends Controller
             ]);
         }
 
-        return view('projects.show', compact('project'));
+        return view('front.projects.show', compact('project'));
     }
 
     /**
