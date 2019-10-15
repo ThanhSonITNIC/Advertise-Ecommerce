@@ -13,7 +13,7 @@
         <div class="col-lg-8 posts-list">
             <div class="single-post">
                 <div class="feature-img">
-                    <img class="img-fluid" src="/front/img//blog/single_blog_2.png" alt="">
+                    <img class="img-fluid" src="/front_assets/img//blog/single_blog_2.png" alt="">
                 </div>
                 <div class="blog_details">
                     <h2>Second divided from form fish beast made every of seas
@@ -76,7 +76,7 @@
                     <div class="single-comment justify-content-between d-flex">
                     <div class="user justify-content-between d-flex">
                         <div class="thumb">
-                            <img src="/front/img//comment/comment_1.png" alt="">
+                            <img src="/front_assets/img//comment/comment_1.png" alt="">
                         </div>
                         <div class="desc">
                             <p class="comment">
@@ -102,7 +102,7 @@
                     <div class="single-comment justify-content-between d-flex">
                     <div class="user justify-content-between d-flex">
                         <div class="thumb">
-                            <img src="/front/img//comment/comment_2.png" alt="">
+                            <img src="/front_assets/img//comment/comment_2.png" alt="">
                         </div>
                         <div class="desc">
                             <p class="comment">
@@ -128,7 +128,7 @@
                     <div class="single-comment justify-content-between d-flex">
                     <div class="user justify-content-between d-flex">
                         <div class="thumb">
-                            <img src="/front/img//comment/comment_3.png" alt="">
+                            <img src="/front_assets/img//comment/comment_3.png" alt="">
                         </div>
                         <div class="desc">
                             <p class="comment">
@@ -243,7 +243,7 @@
                 <aside class="single_sidebar_widget popular_post_widget">
                     <h3 class="widget_title">Related Projects</h3>
                     <div class="media post_item">
-                    <img src="/front/img//post/post_1.png" alt="post">
+                    <img src="/front_assets/img//post/post_1.png" alt="post">
                     <div class="media-body">
                         <a href="single-blog.html">
                             <h3>From life was you fish...</h3>
@@ -252,7 +252,7 @@
                     </div>
                     </div>
                     <div class="media post_item">
-                    <img src="/front/img//post/post_2.png" alt="post">
+                    <img src="/front_assets/img//post/post_2.png" alt="post">
                     <div class="media-body">
                         <a href="single-blog.html">
                             <h3>The Amazing Hubble</h3>
@@ -261,7 +261,7 @@
                     </div>
                     </div>
                     <div class="media post_item">
-                    <img src="/front/img//post/post_3.png" alt="post">
+                    <img src="/front_assets/img//post/post_3.png" alt="post">
                     <div class="media-body">
                         <a href="single-blog.html">
                             <h3>Astronomy Or Astrology</h3>
@@ -270,7 +270,7 @@
                     </div>
                     </div>
                     <div class="media post_item">
-                    <img src="/front/img//post/post_4.png" alt="post">
+                    <img src="/front_assets/img//post/post_4.png" alt="post">
                     <div class="media-body">
                         <a href="single-blog.html">
                             <h3>Asteroids telescope</h3>

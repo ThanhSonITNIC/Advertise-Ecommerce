@@ -14,7 +14,7 @@
                 <div class="blog_left_sidebar">
                     <article class="blog_item">
                         <div class="blog_item_img">
-                            <img class="card-img rounded-0" src="/front/img/blog/single_blog_4.png" alt="">
+                            <img class="card-img rounded-0" src="/front_assets/img/blog/single_blog_4.png" alt="">
                         </div>
 
                         <div class="blog_details">
@@ -34,7 +34,7 @@
 
                     <article class="blog_item">
                         <div class="blog_item_img">
-                            <img class="card-img rounded-0" src="/front/img/blog/single_blog_2.png" alt="">
+                            <img class="card-img rounded-0" src="/front_assets/img/blog/single_blog_2.png" alt="">
                             <a href="#" class="blog_item_date">
                                 <h3>15</h3>
                                 <p>Jan</p>
@@ -56,7 +56,7 @@
 
                     <article class="blog_item">
                         <div class="blog_item_img">
-                            <img class="card-img rounded-0" src="/front/img/blog/single_blog_3.png" alt="">
+                            <img class="card-img rounded-0" src="/front_assets/img/blog/single_blog_3.png" alt="">
                             <a href="#" class="blog_item_date">
                                 <h3>15</h3>
                                 <p>Jan</p>
@@ -78,7 +78,7 @@
 
                     <article class="blog_item">
                         <div class="blog_item_img">
-                            <img class="card-img rounded-0" src="/front/img/blog/single_blog_4.png" alt="">
+                            <img class="card-img rounded-0" src="/front_assets/img/blog/single_blog_4.png" alt="">
                             <a href="#" class="blog_item_date">
                                 <h3>15</h3>
                                 <p>Jan</p>
@@ -100,7 +100,7 @@
 
                     <article class="blog_item">
                         <div class="blog_item_img">
-                            <img class="card-img rounded-0" src="/front/img/blog/single_blog_5.png" alt="">
+                            <img class="card-img rounded-0" src="/front_assets/img/blog/single_blog_5.png" alt="">
                             <a href="#" class="blog_item_date">
                                 <h3>15</h3>
                                 <p>Jan</p>
@@ -204,7 +204,7 @@
                     <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Hot projects</h3>
                         <div class="media post_item">
-                            <img src="/front/img/post/post_1.png" alt="post">
+                            <img src="/front_assets/img/post/post_1.png" alt="post">
                             <div class="media-body">
                                 <a href="single-blog.html">
                                     <h3>From life was you fish...</h3>
@@ -213,7 +213,7 @@
                             </div>
                         </div>
                         <div class="media post_item">
-                            <img src="/front/img/post/post_2.png" alt="post">
+                            <img src="/front_assets/img/post/post_2.png" alt="post">
                             <div class="media-body">
                                 <a href="single-blog.html">
                                     <h3>The Amazing Hubble</h3>
@@ -222,7 +222,7 @@
                             </div>
                         </div>
                         <div class="media post_item">
-                            <img src="/front/img/post/post_3.png" alt="post">
+                            <img src="/front_assets/img/post/post_3.png" alt="post">
                             <div class="media-body">
                                 <a href="single-blog.html">
                                     <h3>Astronomy Or Astrology</h3>
@@ -231,7 +231,7 @@
                             </div>
                         </div>
                         <div class="media post_item">
-                            <img src="/front/img/post/post_4.png" alt="post">
+                            <img src="/front_assets/img/post/post_4.png" alt="post">
                             <div class="media-body">
                                 <a href="single-blog.html">
                                     <h3>Asteroids telescope</h3>

@@ -36,3 +36,15 @@ Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
     Route::get('projects/{id}', 'ProjectsController@show')->name('projects.show');
     
 });
+
+Route::prefix('admin')->namespace('Administrator')->name('admin.')->group(function(){
+    Route::get('', 'DashboardController@index')->name('dashboard');
+
+    Route::resource('users', 'UsersController');
+
+    Route::resource('projects', 'ProjectsController');
+
+    Route::resource('materials', 'MaterialsController');
+
+    Route::resource('posts', 'PostsController');
+});

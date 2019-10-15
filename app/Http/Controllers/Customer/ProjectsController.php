@@ -113,7 +113,7 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        $project = $this->repository->with(['products', 'comments'])->find($id);
+        $project = $this->repository->with(['materials', 'comments'])->find($id);
 
         if (request()->wantsJson()) {
 
