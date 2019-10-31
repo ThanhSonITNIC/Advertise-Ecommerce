@@ -22,6 +22,7 @@
 
 // Auth::routes();
 
+// guest
 Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
     Route::get('', 'HomeController@index')->name('home');
 
@@ -37,7 +38,14 @@ Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
     
 });
 
+// auth
+Auth::routes();
+Route::post('login', 'Auth\LoginController@login')->name('login');
+
+
+// admin
 Route::prefix('admin')->namespace('Administrator')->name('admin.')->group(function(){
+
     Route::get('', 'DashboardController@index')->name('dashboard');
 
     Route::resource('users', 'UsersController');

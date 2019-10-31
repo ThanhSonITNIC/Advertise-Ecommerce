@@ -1,46 +1,45 @@
-@extends('layouts.app')
+@extends('auth.main')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+@section('body')
+<div class="app-content content container-fluid">
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <section class="flexbox-container">
+                <div class="col-md-4 offset-md-4 col-xs-10 offset-xs-1 box-shadow-2 p-0">
+                    <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
+                        <div class="card-header no-border pb-0">
+                            <div class="card-title text-xs-center">
+                                <img src="admin_assets/app-assets/images/logo/robust-logo-dark.png" alt="branding logo">
+                            </div>
+                            <h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>We
+                                    will send you a link to reset your password.</span></h6>
                         </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="card-body collapse in">
+                            <div class="card-block">
+                                <form class="form-horizontal" method="POST" action="{{route('password.email')}}" novalidate>
+                                    @csrf
+                                    <fieldset class="form-group position-relative has-icon-left">
+                                        <input name="email" type="email" class="form-control form-control-lg input-lg"
+                                            id="user-email" placeholder="Your Email Address" required>
+                                        <div class="form-control-position">
+                                            <i class="icon-mail6"></i>
+                                        </div>
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block"><i
+                                            class="icon-lock4"></i> Recover Password</button>
+                                </form>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
+                        <div class="card-footer no-border">
+                            <p class="float-sm-left text-xs-center"><a href="{{route('login')}}"
+                                    class="card-link">Login</a></p>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </section>
+
         </div>
     </div>
 </div>
