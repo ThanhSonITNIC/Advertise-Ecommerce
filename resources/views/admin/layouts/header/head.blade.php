@@ -34,6 +34,6 @@
 <!-- END Page Level CSS-->
 @yield('link')
 <!-- BEGIN Custom CSS-->
-<link rel="stylesheet" type="text/css" href="assets/css/text-line.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="admin_assets/assets/css/text-line.css">
+<link rel="stylesheet" type="text/css" href="admin_assets/assets/css/style.css">
 <!-- END Custom CSS-->
