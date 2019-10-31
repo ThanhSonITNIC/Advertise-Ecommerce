@@ -41,10 +41,10 @@ Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
 // auth
 Auth::routes();
 Route::post('login', 'Auth\LoginController@login')->name('login');
-
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 // admin
-Route::prefix('admin')->namespace('Administrator')->name('admin.')->group(function(){
+Route::prefix('admin')->middleware(['auth', 'levels:admin'])->namespace('Administrator')->name('admin.')->group(function(){
 
     Route::get('', 'DashboardController@index')->name('dashboard');
 
