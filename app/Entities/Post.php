@@ -22,13 +22,21 @@ class Post extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'title', 'slug', 'description', 'content', 'image', 'id_author', 'id_type', 'highlight', 'status', 'tags'];
+    protected $fillable = ['id', 'title', 'slug', 'description', 'content', 'image', 'id_author', 'id_type', 'highlight', 'published', 'tags'];
 
     public function type(){
-        return $this->belongTo('App\Entities\PostType', 'id_type');
+        return $this->belongsTo('App\Entities\PostType', 'id_type');
     }
 
     public function author(){
-        return $this->belongTo('App\Entities\User', 'id_author');
+        return $this->belongsTo('App\Entities\User', 'id_author');
+    }
+
+    public function image(){
+        return json_decode($this->image)->urls->default ?? null;
+    }
+
+    public function watermark(){
+        return json_decode($this->image)->urls->watermark ?? null;
     }
 }

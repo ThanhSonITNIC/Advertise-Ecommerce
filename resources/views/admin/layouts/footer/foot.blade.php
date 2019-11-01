@@ -20,6 +20,8 @@
 {{-- <script src="admin_assets/app-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script> --}}
 <!-- END PAGE LEVEL JS-->
 
+<script src="js/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+
 <script src="admin_assets/assets/js/scripts.js" type="text/javascript"></script>
 
 @yield('script')

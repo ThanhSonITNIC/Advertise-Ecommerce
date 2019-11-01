@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use View;
+use App\Entities\PostType;
 
 class Levels
 {
@@ -20,6 +22,8 @@ class Levels
         if(!in_array(Auth::user()->id_level, $levels)){
             return abort(403, 'Access denied');
         }
+
+        View::share('postTypes', PostType::all());
 
         return $next($request);
     }

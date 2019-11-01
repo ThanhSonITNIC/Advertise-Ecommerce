@@ -49,7 +49,7 @@ class PostsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $posts = $this->repository->all();
+        $posts = $this->repository->paginate();
 
         if (request()->wantsJson()) {
 
@@ -75,7 +75,9 @@ class PostsController extends Controller
         try {
             // update request
             $request->request->add(['id_author' => \Auth::id()]);
-
+            $request->request->add(['highlight' => $request->exists('highlight')]);
+            $request->request->add(['published' => $request->exists('published')]);
+            
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $post = $this->repository->create($request->all());
@@ -90,7 +92,7 @@ class PostsController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect(route('admin.posts.show', $post->id))->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -151,6 +153,9 @@ class PostsController extends Controller
     public function update(PostUpdateRequest $request, $id)
     {
         try {
+            // update request
+            $request->request->add(['highlight' => $request->exists('highlight')]);
+            $request->request->add(['published' => $request->exists('published')]);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
@@ -201,6 +206,32 @@ class PostsController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'Post deleted.');
+        return redirect(route('admin.posts.index'))->with('message', 'Post deleted.');
+    }
+
+    public function create(){
+        return view('admin.posts.create');
+    }
+
+    /**
+     * Display a listing of the resource by type.
+     *
+     * @param $id type
+     * @return \Illuminate\Http\Response
+     */
+    public function type($id)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+
+        $posts = $this->repository->type($id);
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'data' => $posts,
+            ]);
+        }
+
+        return view('admin.posts.index', compact('posts'));
     }
 }

@@ -74,7 +74,15 @@
       $('input[name=slug]').val(convertToSlug($(this).val()));
     });
   
-  
+    // disable tags input enter key
+    $(".bootstrap-tagsinput").keypress(
+      function(event){
+        if (event.which == '13') {
+          event.preventDefault();
+        }
+    });
+
+
   
   
   

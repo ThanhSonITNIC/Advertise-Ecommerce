@@ -11,5 +11,12 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface PostRepository extends RepositoryInterface
 {
-    //
+    /**
+     * Get list post by type
+     * 
+     * @param $id
+     * 
+     * @return mixed
+     */
+    public function type($id);
 }

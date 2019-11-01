@@ -21,7 +21,7 @@
         <div class="col-xs-10">
             <div class="pb-1">
                 <fieldset class="form-group position-relative mb-0">
-                    <input type="text" class="form-control form-control-md input-md" name="search" placeholder="@lang('Search')">
+                    <input type="text" class="form-control form-control-md input-md" name="search" placeholder="@lang('Search')" value="{{request()->search}}">
                     <div class="form-control-position">
                         <button type="submit" class="form-control btn-link"><i class="font-medium icon-search7"></i></button>
                     </div>

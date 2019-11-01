@@ -8,9 +8,8 @@
     $searchFields = [
         ['value' => 'title', 'display' => 'Title'],
         ['value' => 'author.name', 'display' => 'Author'],
-        ['value' => 'status', 'display' => 'Status'],
-        ['value' => 'type.name', 'display' => 'Type'],
-        ['value' => 'highlight', 'display' => 'Highlight'],
+        ['value' => 'published', 'display' => 'Published'],
+        ['value' => 'created_at', 'display' => 'Created at'],
     ];
 @endphp
 @include('admin.layouts.search.index', $searchFields)
@@ -24,7 +23,7 @@
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                        <li><a href="{{route('admin.posts.create')}}"><i class="icon-plus success"></i></a></li>
                         <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                     </ul>
                 </div>
@@ -37,9 +36,7 @@
                                 <th>#</th>
                                 <th>@lang('Title')</th>
                                 <th>@lang('Author')</th>
-                                <th>@lang('Highlight')</th>
-                                <th>@lang('Type')</th>
-                                <th>@lang('Status')</th>
+                                <th>@lang('Published')</th>
                                 <th>@lang('Created at')</th>
                             </tr>
                         </thead>
@@ -49,9 +46,7 @@
                                     <th scope="row">{{$index+1}}</th>
                                     <td class="text-nowrap">{{$post->title}}</td>
                                     <td>{{$post->author->name}}</td>
-                                    <td>{{$post->highlight}}</td>
-                                    <td>{{$post->type->name}}</td>
-                                    <td>{{$post->status}}</td>
+                                    <td>{{$post->published}}</td>
                                     <td class="text-nowrap">{{$post->created_at}}</td>
                                 </tr>
                             @endforeach
@@ -61,9 +56,8 @@
             </div>
         </div>
         <div class="text-xs-right">
-            {{-- {{ $posts->links() }} --}}
+            {{ $posts->links() }}
         </div>
-        {{-- <a class="btn btn-primary" href="{{route('admin.posts.create').'?type='.$type->id}}">@lang('Create')</a> --}}
     </div>
 </div>
 <!-- order Tables end -->    

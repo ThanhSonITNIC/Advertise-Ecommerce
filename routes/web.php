@@ -11,16 +11,10 @@
 |
 */
 
-// Route::any('{all}', function () {
-//     return view('app');
-// })
-// ->where(['all' => '.*']);
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Auth::routes();
+// auth
+Auth::routes();
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 // guest
 Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
@@ -38,21 +32,25 @@ Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
     
 });
 
-// auth
-Auth::routes();
-Route::post('login', 'Auth\LoginController@login')->name('login');
-Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-
 // admin
-Route::prefix('admin')->middleware(['auth', 'levels:admin'])->namespace('Administrator')->name('admin.')->group(function(){
+Route::prefix('admin')->middleware(['auth', 'levels:admin'])->name('admin.')->group(function(){
 
-    Route::get('', 'DashboardController@index')->name('dashboard');
+    Route::namespace('Administrator')->group(function(){
+        Route::get('', 'DashboardController@index')->name('dashboard');
 
-    Route::resource('users', 'UsersController');
+        Route::resource('users', 'UsersController');
+    
+        Route::resource('projects', 'ProjectsController');
+    
+        Route::resource('materials', 'MaterialsController');
+    
+        Route::resource('posts', 'PostsController');
+        Route::get('posts/type/{id}', 'PostsController@type')->name('posts.type');
+    });
 
-    Route::resource('projects', 'ProjectsController');
+    Route::prefix('upload')->namespace('Upload')->name('upload.')->group(function(){
+        Route::post('images/post', 'ImagesController@post')->name('post');
+        Route::post('images/article', 'ImagesController@article')->name('article');
+    });
 
-    Route::resource('materials', 'MaterialsController');
-
-    Route::resource('posts', 'PostsController');
 });

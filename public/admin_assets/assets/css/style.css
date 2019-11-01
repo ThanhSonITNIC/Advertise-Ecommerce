@@ -343,3 +343,8 @@ button.delete {
 .form-search .position-relative button.form-control {
     cursor: pointer;
 }
+
+.bootstrap-tagsinput .tag {
+    color: black;
+    background-color: #ebebeb;
+}

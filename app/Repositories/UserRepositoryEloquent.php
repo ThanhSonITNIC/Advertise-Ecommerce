@@ -15,6 +15,10 @@ use App\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $fieldSearchable = [
+        
+    ];
+
     /**
      * Specify Model class name
      *

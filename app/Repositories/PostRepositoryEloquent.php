@@ -15,6 +15,13 @@ use App\Validators\PostValidator;
  */
 class PostRepositoryEloquent extends BaseRepository implements PostRepository
 {
+    protected $fieldSearchable = [
+        'title' => 'like',
+        'author.name' => 'like',
+        'published' => '=',
+        'created_at' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *
@@ -43,6 +50,38 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id){
+        // delete images
+        $image = Post::find($id)->image;
+        if(!empty($image))
+            foreach (json_decode($image, true)['urls'] as $image) {
+                !isset($image) ?: \File::delete($image);
+            }
+        
+        // delete storage
+        parent::delete($id);
+    }
+
+    /**
+     * Get list post by type
+     * 
+     * @param $id
+     * 
+     * @return mixed
+     */
+    public function type($id){
+        return $this->scopeQuery(function($scope) use ($id){
+            return $scope->where('id_type', $id);
+        })->paginate();
     }
     
 }

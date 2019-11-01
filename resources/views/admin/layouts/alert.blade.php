@@ -17,7 +17,7 @@
 @endif
 
 @if(session()->has('message'))
-    <div class="alert alert-default mb-2" role="alert">
+    <div class="alert alert-primary mb-2" role="alert">
             {!! session()->get('message') !!}
     </div>
 @endif

@@ -51,7 +51,7 @@ class ForgotPasswordController extends Controller
         if (request()->wantsJson()) {
             return ['message' => $response == Password::RESET_LINK_SENT];
         }else{
-            return redirect(route('login'))->with(['success' => 'Link reset password has been sent to your mail']);
+            return redirect(route('login'))->with(['message' => 'Link reset password has been sent to your mail']);
         }
     }
 

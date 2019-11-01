@@ -24,8 +24,8 @@ class CreatePostsTable extends Migration
 			$table->longText('content')->nullable();
 			$table->unsignedInteger('id_author');
 			$table->string('id_type', 30)->nullable();
-			$table->boolean('highlight');
-			$table->integer('status')->default(1);
+			$table->boolean('highlight')->default(false);
+			$table->boolean('published')->default(false);
 			$table->text('tags')->nullable();
 			$table->timestamps();
 			
