@@ -9,7 +9,7 @@
     @include('admin.layouts.header.top')
 
     {{-- menu --}}
-    @include('admin.layouts.menu')
+    @include('admin.layouts.navigation.index')
 
     {{-- body --}}
     <div class="app-content content container-fluid">
