@@ -25,9 +25,9 @@
                                     Dự án
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('guest.projects.show', 1)}}">Some project</a>
-                                    <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                    <a class="dropdown-item" href="elements.html">Elements</a>
+                                    @foreach ($projectTypes as $type)
+                                        <a class="dropdown-item" href="{{route('guest.projects.type', $type->id)}}">{{$type->name}}</a>
+                                    @endforeach
                                 </div>
                             </li>
                             <li class="nav-item">

@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-    <base src="{{asset('')}}">
+    <base href="{{asset('')}}">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Etrain</title>
+    @yield('meta')
+    <title>@yield('title')</title>
     <link rel="icon" href="/front_assets/img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/front_assets/css/bootstrap.min.css">

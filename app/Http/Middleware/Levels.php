@@ -20,10 +20,11 @@ class Levels
     public function handle($request, Closure $next, ...$levels)
     {
         // check level access
-        if(!in_array(Auth::user()->id_level, $levels)){
-            return abort(403, 'Access denied');
-        }
-
+        if(count($levels) > 0)
+            if(!in_array(Auth::user()->id_level, $levels)){
+                return abort(403, 'Access denied');
+            }
+        
         View::share('postTypes', PostType::all());
         View::share('projectTypes', ProjectType::all());
 

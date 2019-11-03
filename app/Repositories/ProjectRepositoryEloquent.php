@@ -65,5 +65,18 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             return $scope->where('id_type', $id);
         })->paginate();
     }
+
+    /**
+     * Get list highlight project
+     * 
+     * @return mixed
+     */
+    public function highlights(){
+        $this->popCriteria(app(RequestCriteria::class));
+
+        return $this->scopeQuery(function($scope){
+            return $scope->where('highlight', true);
+        })->orderBy('created_at', 'desc')->get();
+    }
     
 }

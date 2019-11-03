@@ -19,4 +19,11 @@ interface ProjectRepository extends RepositoryInterface
      * @return mixed
      */
     public function type($id);
+
+    /**
+     * Get list highlight project
+     * 
+     * @return mixed
+     */
+    public function highlights();
 }

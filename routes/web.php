@@ -17,7 +17,7 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 // guest
-Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
+Route::prefix('')->namespace('Guest')->middleware('levels')->name('guest.')->group(function(){
     Route::get('', 'HomeController@index')->name('home');
 
     Route::get('about', 'AboutController@index')->name('about');
@@ -29,6 +29,7 @@ Route::prefix('')->namespace('Guest')->name('guest.')->group(function(){
 
     Route::get('projects', 'ProjectsController@index')->name('projects');
     Route::get('projects/{id}', 'ProjectsController@show')->name('projects.show');
+    Route::get('projects/type/{id}', 'ProjectsController@type')->name('projects.type');
     
 });
 
