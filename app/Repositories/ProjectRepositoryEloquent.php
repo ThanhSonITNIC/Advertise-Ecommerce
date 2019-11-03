@@ -15,6 +15,14 @@ use App\Validators\ProjectValidator;
  */
 class ProjectRepositoryEloquent extends BaseRepository implements ProjectRepository
 {
+    protected $fieldSearchable = [
+        'id' => '=',
+        'name' => 'like',
+        'budget' => '=',
+        'customer.name' => 'like',
+        'created_at' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *
@@ -43,6 +51,19 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * Get list post by type
+     * 
+     * @param $id
+     * 
+     * @return mixed
+     */
+    public function type($id){
+        return $this->scopeQuery(function($scope) use ($id){
+            return $scope->where('id_type', $id);
+        })->paginate();
     }
     
 }

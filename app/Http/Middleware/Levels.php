@@ -6,6 +6,7 @@ use Closure;
 use Auth;
 use View;
 use App\Entities\PostType;
+use App\Entities\ProjectType;
 
 class Levels
 {
@@ -24,6 +25,7 @@ class Levels
         }
 
         View::share('postTypes', PostType::all());
+        View::share('projectTypes', ProjectType::all());
 
         return $next($request);
     }

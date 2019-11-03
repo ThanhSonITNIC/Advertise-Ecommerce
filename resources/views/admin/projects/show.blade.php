@@ -4,186 +4,171 @@
 
 @include('admin.layouts.alert')
 
-<!-- Info -->
-<div class="row">
-    <div class="col-xs-12">
-        <div class="card">
-            <div class="card-body collapse in">
-                <div class="table-responsive">
-                    <table class="table table-bordered cursor-hand mb-0">
-                        <thead>
-                            <tr>
-                                <th>@lang('ID')</th>
-                                <th>@lang('Customer')</th>
-                                <th>@lang('Total')</th>
-                                <th class="text-nowrap">@lang('Created at')</th>
-                                <th>@lang('Status')</th>
-                                <th class="text-nowrap">@lang('To step')</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{$project->id}}</td>
-                                <td><a href="{{route('admin.users.show', $project->customer)}}">{{$project->customer}}</a></td>
-                                <td>{{$project->total}}</td>
-                                <td class="text-nowrap">{{$project->created_at}}</td>
-                                <td>{{$project->status}}</td>
-                                <td>
-                                    <form name="to-step" action="{{route('admin.projects.update', $project->id)}}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <select id='status' name='id_status' class="form-control form-control-sm input-sm">
-                                            {{-- @foreach ($project->type->status as $status)
-                                                <option value="{{$status->id}}" @if($status->id == $project->id_status) selected @endif>{{$status->name}}</option>
-                                            @endforeach --}}
-                                        </select>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+<!-- Form start -->
+<section id="basic-form-layouts">
+    <div class="row match-height">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="basic-layout-colored-form-control">@lang('Project')</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Info end --> 
-
-<!-- Materials -->
-<div class="row">
-    <div class="col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">@lang('Materials')</h4>
-                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                        <li><a data-action="close"><i class="icon-cross2"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body collapse in">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover sortable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>@lang('Name')</th>
-                                <th>@lang('Quantity')</th>
-                                <th>@lang('Price')</th>
-                                <th>@lang('Total')</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id='result'>
-                            @foreach ($project->materials as $index=>$material)
-                                <tr data-id="{{$material->id_product}}"  data-toggle="modal" data-target="#product_{{$material->id_product}}">
-                                    <th scope="row">{{$index+1}}</th>
-                                    <td class="text-nowrap"><a href='{{route('admin.materials.show', 1)}}'>{{$material->material}}</a></td>
-                                    <td>{{$material->quantity}}</td>
-                                    <td>{{$material->price}}</td>
-                                    <td>{{$material->total}}</td>
-                                </tr>
-
-                                <div class="modal fade text-xs-left" id="product_{{$material->id_product}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <label class="modal-title text-text-bold-600">{{$material->material}}</label>
-                                            </div>
-                                            <form action="" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <input type="hidden" name="id_order" value="{{$project->id}}">
-                                                <div class="modal-body">
-                                                    <label>@lang('Quantity'): </label>
-                                                    <div class="form-group">
-                                                        <input type="number" class="form-control" name="quantity" value="{{$material->quantity}}">
-                                                    </div>
-                                                    <label>@lang('Price'): </label>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="price" value="{{$material->price}}">
-                                                    </div>
-                                                    <label>@lang('Color'): </label>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="color" value="{{$material->color}}">
-                                                    </div>
-                                                    <label>@lang('Size'): </label>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="size" value="{{$material->size}}">
-                                                    </div>
-                                                    <label>@lang('Note'): </label>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="note" value="{{$material->note}}">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="@lang('Close')">
-                                                    <input type="submit" class="btn btn-outline-primary" value="@lang('Save')">
-                                                </div>
-                                            </form>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+                        <form class="form form-editor" method="POST" action="{{route('admin.projects.update', $project->id)}}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>@lang('Name')</label>
+                                            <input class="form-control" type="text" name="name" value="{{$project->name}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>@lang('Slug')</label>
+                                            <input type="text" class="form-control" name="slug" value="{{$project->slug}}" required>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>@lang('Customer')</label>
+                                            <input class="form-control" type="text" name="id_customer" value="{{$project->id_customer}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>@lang('Budget')</label>
+                                            <input type="number" class="form-control" name="budget" value="{{$project->budget}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>@lang('Start at')</label>
+                                            <input class="form-control" type="date" name="start_at" value="{{$project->start_at}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>@lang('Finish at')</label>
+                                            <input type="date" class="form-control" name="finish_at" value="{{$project->finish_at}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>@lang('Finished at')</label>
+                                            <input type="date" class="form-control" name="finished_at" value="{{$project->finished_at}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>@lang('Type')</label>
+                                            <select name="id_type" class="form-control">
+                                                @foreach ($projectTypes as $type)
+                                                    <option 
+                                                        value="{{$type->id}}" 
+                                                        @if($project->id_type == $type->id) 
+                                                            selected
+                                                        @endif>
+                                                        {{$type->name}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>@lang('Highlight')</label>
+                                            <div class="form-control">
+                                                <label class="custom-control custom-checkbox mb-0">
+                                                    <input type="checkbox" class="custom-control-input" name="highlight" @if($project->highlight) checked @endif>
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>@lang('Publish')</label>
+                                            <div class="form-control">
+                                                <label class="custom-control custom-checkbox mb-0">
+                                                    <input type="checkbox" class="custom-control-input" name="published" @if($project->published) checked @endif>
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label>@lang('Description')</label>
+                                            <textarea rows="5" class="form-control" name="description" >{{$project->description}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>@lang('Image')</label>
+                                            <div>
+                                                <input type="text" hidden name="image" value="{{$project->image}}">
+                                                <input id="image" type="file" hidden accept="image/*" class="custom-file-input">
+                                                <label for="image" class="w-100">
+                                                    <img id="review" class="img-fluid form-control" style="height:100px" src="{{$project->watermark()}}" alt="Choose image">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>@lang('Tags')</label>
+                                            <input type="text" class="form-control tags" name="tags" value="{{$project->tags}}" data-role="tagsinput">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@lang('Content')</label>
+                                    <input type="text" name='content' value="{{$project->content}}" hidden>
+                                    <div id="toolbar-container"></div>
+                                    <div id="editor" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="form-actions right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="icon-check2"></i> @lang('Save')
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Materials end -->    
+</section>
+<!-- Form end --> 
 
+@endsection
 
-<!-- Log -->
-<div class="row">
-    <div class="col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">@lang('Logs')</h4>
-                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                        <li><a data-action="close"><i class="icon-cross2"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body collapse in">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th class="text-nowrap">@lang('User')</th>
-                                <th class="text-nowrap">@lang('Content')</th>
-                                <th class="text-nowrap">@lang('At')</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @foreach ($project->logs as $index=>$log)
-                                <tr>
-                                    <th scope="row">{{$index+1}}</th>
-                                    <td class="text-nowrap">{{$log->id_status}}</td>
-                                    <td>{{$log->amount}}</td>
-                                    <td class="text-nowrap">{{$log->updated_by}}</td>
-                                    <td class="text-nowrap">{{$log->created_at}}</td>
-                                </tr>
-                            @endforeach --}}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Log end -->   
+@section('script')
+
+    @include('admin.layouts.editor.ckeditor5')
+
+    @include('admin.layouts.components.image-upload', ['url' => route('admin.upload.post')])
 
 @endsection

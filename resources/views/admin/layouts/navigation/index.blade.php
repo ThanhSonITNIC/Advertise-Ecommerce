@@ -30,6 +30,8 @@
                     'title' => 'Projects',
                     'icon' => 'icon-social-codepen-outline',
                     'route' => 'admin.projects.index',
+                    'subRoute' => 'admin.projects.type',
+                    'sub' => json_decode(json_encode($projectTypes), true),
                 ]
             )
             @include(

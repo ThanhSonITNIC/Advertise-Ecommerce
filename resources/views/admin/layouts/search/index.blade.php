@@ -11,7 +11,7 @@
     <form action="" class="form-search" method="get">
         <div class="col-xs-2">
             <div class="pb-1">
-                <select name='searchFields' class="form-control form-control-md input-md" required>
+                <select name='searchFields' class="form-control form-control-md input-md">
                     @foreach ($searchFields as $field)
                         <option value="{{$field['value']}}" @if(request('searchFields') == $field['value']) selected @endif>@lang($field['display'])</option>
                     @endforeach

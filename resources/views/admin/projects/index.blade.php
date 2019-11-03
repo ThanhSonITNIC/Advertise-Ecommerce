@@ -6,11 +6,12 @@
 <!-- Search start -->
 @php
     $searchFields = [
+        ['value' => '', 'display' => 'All'],
         ['value' => 'id', 'display' => 'Id'],
+        ['value' => 'name', 'display' => 'Name'],
+        ['value' => 'budget', 'display' => 'Budget'],
         ['value' => 'customer.name', 'display' => 'Customer'],
-        ['value' => 'total', 'display' => 'Total'],
-        ['value' => 'paid', 'display' => 'Paid'],
-        ['value' => 'status.name', 'display' => 'Status'],
+        ['value' => 'created_at', 'display' => 'Created at'],
     ];
 @endphp
 @include('admin.layouts.search.index', $searchFields)
@@ -24,7 +25,7 @@
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                        <li><a href="{{route('admin.projects.create')}}"><i class="icon-plus success"></i></a></li>
                         <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                     </ul>
                 </div>
@@ -34,21 +35,21 @@
                     <table class="table table-bordered table-striped table-hover sortable">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Name</th>
-                                <th class='text-nowrap'>Customer</th>
                                 <th>Budget</th>
-                                <th>Paid</th>
-                                <th>Status</th>
+                                <th class='text-nowrap'>Customer</th>
+                                <th>Created at</th>
                             </tr>
                         </thead>
                         <tbody id='result'>
                             @foreach ($projects as $index=>$project)
                                 <tr data-id="{{$project->id}}">
-                                    <th scope="row">{{$project->name}}</th>
-                                    <td class='text-nowrap'>{{$project->customer}}</td>
-                                    <td class='text-nowrap'>{{$project->price}}</td>
-                                    <td>{{$project->paid}}</td>
-                                    <td class='text-nowrap'>{{$project->status}}</td>
+                                    <th scope="row">{{$index+1}}</th>
+                                    <th class='text-nowrap'>{{$project->name}}</th>
+                                    <td class='text-nowrap'>{{$project->budget}}</td>
+                                    <td class='text-nowrap'>{{$project->customer ? $project->customer->name : null}}</td>
+                                    <td class='text-nowrap'>{{$project->created_at}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -57,7 +58,7 @@
             </div>
         </div>
         <div class="text-xs-right">
-            {{-- {{ $projects->links() }} --}}
+            {{ $projects->links() }}
         </div>
     </div>
 </div>

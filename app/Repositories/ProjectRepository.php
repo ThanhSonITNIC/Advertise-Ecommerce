@@ -11,5 +11,12 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ProjectRepository extends RepositoryInterface
 {
-    //
+    /**
+     * Get list project by type
+     * 
+     * @param $id
+     * 
+     * @return mixed
+     */
+    public function type($id);
 }

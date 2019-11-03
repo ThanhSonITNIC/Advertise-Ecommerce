@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label>@lang('Image')</label>
                                             <div>
-                                                <input type="text" hidden name="image">
+                                                <input type="text" hidden name="image" value="{{$post->image}}">
                                                 <input id="image" type="file" hidden accept="image/*" class="custom-file-input">
                                                 <label for="image" class="w-100">
                                                     <img id="review" class="img-fluid form-control" style="height:100px" src="{{$post->watermark()}}" alt="Choose image">
@@ -143,6 +143,6 @@
 
     @include('admin.layouts.editor.ckeditor5')
 
-    @include('admin.posts.image-upload')
+    @include('admin.layouts.components.image-upload', ['url' => route('admin.upload.post')])
 
 @endsection

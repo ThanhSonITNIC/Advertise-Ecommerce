@@ -22,14 +22,30 @@ class Project extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'slug', 'description', 'images', 'customer', 'price', 'highlight', 'start_at', 'finished_at', 'id_type', 'id_customer', 'tags', 'rate'];
+    protected $fillable = [
+        'id',
+        'name',
+        'slug',
+        'description',
+        'content',
+        'image',
+        'id_customer', //
+        'budget', //
+        'highlight',
+        'start_at', //
+        'finish_at', //
+        'finished_at', //
+        'id_type',
+        'tags',
+        'published'
+    ];
 
     public function type(){
-        return $this->belongTo('App\Entities\ProjectType', 'id_type');
+        return $this->belongsTo('App\Entities\ProjectType', 'id_type');
     }
 
     public function customer(){
-        return $this->belongTo('App\Entities\User', 'id_customer');
+        return $this->belongsTo('App\Entities\User', 'id_customer');
     }
 
     public function comments(){
@@ -39,4 +55,13 @@ class Project extends Model implements Transformable
     public function materials(){
         return $this->hasMany('App\Entities\Material', 'id_project');
     }
+
+    public function image(){
+        return json_decode($this->image)->urls->default ?? null;
+    }
+
+    public function watermark(){
+        return json_decode($this->image)->urls->watermark ?? null;
+    }
+    
 }

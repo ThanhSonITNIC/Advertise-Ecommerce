@@ -29,10 +29,10 @@ class Material extends Model implements Transformable
     protected $fillable = ['code', 'name', 'price', 'quantity', 'description', 'id_unit', 'id_project'];
 
     public function unit(){
-        return $this->belongTo('App\Entities\Unit', 'id_unit');
+        return $this->belongsTo('App\Entities\Unit', 'id_unit');
     }
 
     public function project(){
-        return $this->belongTo('App\Entities\Project', 'id_project');
+        return $this->belongsTo('App\Entities\Project', 'id_project');
     }
 }

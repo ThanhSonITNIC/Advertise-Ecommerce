@@ -25,11 +25,11 @@ class ProjectComment extends Model implements Transformable
     protected $fillable = ['id_project', 'content', 'id_creator'];
 
     public function creator(){
-        return $this->belongTo('App\Entities\User', 'id_creator');
+        return $this->belongsTo('App\Entities\User', 'id_creator');
     }
 
     public function project(){
-        return $this->belongTo('App\Entities\Project', 'id_project');
+        return $this->belongsTo('App\Entities\Project', 'id_project');
     }
 
 }

@@ -49,7 +49,7 @@ class ProjectsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $projects = $this->repository->all();
+        $projects = $this->repository->paginate();
 
         if (request()->wantsJson()) {
 
@@ -73,6 +73,9 @@ class ProjectsController extends Controller
     public function store(ProjectCreateRequest $request)
     {
         try {
+            // update request
+            $request->request->add(['highlight' => $request->exists('highlight')]);
+            $request->request->add(['published' => $request->exists('published')]);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -88,7 +91,7 @@ class ProjectsController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect(route('admin.projects.show', $project->id))->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -149,6 +152,9 @@ class ProjectsController extends Controller
     public function update(ProjectUpdateRequest $request, $id)
     {
         try {
+            // update request
+            $request->request->add(['highlight' => $request->exists('highlight')]);
+            $request->request->add(['published' => $request->exists('published')]);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
@@ -200,5 +206,31 @@ class ProjectsController extends Controller
         }
 
         return redirect()->back()->with('message', 'Project deleted.');
+    }
+
+    public function create(){
+        return view('admin.projects.create');
+    }
+
+    /**
+     * Display a listing of the resource by type.
+     *
+     * @param $id type
+     * @return \Illuminate\Http\Response
+     */
+    public function type($id)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+
+        $projects = $this->repository->type($id);
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'data' => $projects,
+            ]);
+        }
+
+        return view('admin.projects.index', compact('projects'));
     }
 }

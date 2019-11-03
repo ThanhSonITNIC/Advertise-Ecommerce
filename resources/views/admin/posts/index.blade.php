@@ -6,6 +6,7 @@
 <!-- Search start -->
 @php
     $searchFields = [
+        ['value' => '', 'display' => 'All'],
         ['value' => 'title', 'display' => 'Title'],
         ['value' => 'author.name', 'display' => 'Author'],
         ['value' => 'published', 'display' => 'Published'],

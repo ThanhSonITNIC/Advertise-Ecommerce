@@ -1,3 +1,14 @@
+{{-- 
+
+    $url : link to upload image
+    ----------
+    upload : param data upload through ajax
+    ----------
+    input[name=image] : name image when uploaded
+    #review : image review when uploaded
+
+--}}
+
 <script>
     $('#image').change(function(){
         var upload = new FormData();
@@ -5,7 +16,7 @@
 
         $.ajax({
             type:'POST',
-            url:'/admin/upload/images/post',
+            url: '{{$url}}',
             data:upload,
             processData: false,
             contentType: false,

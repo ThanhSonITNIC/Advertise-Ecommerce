@@ -53,7 +53,7 @@ class User extends Authenticatable implements Transformable, MustVerifyEmail, Ca
 
 
     public function level(){
-        return $this->belongTo('App\Entities\Level', 'id_level');
+        return $this->belongsTo('App\Entities\Level', 'id_level');
     }
 
     public function projectComments(){
