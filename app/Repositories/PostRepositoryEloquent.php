@@ -83,5 +83,58 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
             return $scope->where('id_type', $id);
         })->paginate();
     }
+
+    /**
+     * Get list highlight project
+     * 
+     * @return mixed
+     */
+    public function highlights(){
+        $this->popCriteria(app(RequestCriteria::class));
+
+        return $this->scopeQuery(function($scope){
+            return $scope->where('highlight', true);
+        })->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
+     * Get news
+     * 
+     * @return mixed
+     */
+    public function news(){
+        return $this->scopeQuery(function($scope){
+            return $scope->where('id_type', 'news');
+        })->paginate();
+    }
+
+    /**
+     * Get about
+     * 
+     * @return App\Entities\Post
+     */
+    public function about(){
+        return $this->findByField('id_type', 'about')->first();
+    }
+
+    /**
+     * Get contact
+     * 
+     * @return App\Entities\Post
+     */
+    public function contact(){
+        return $this->findByField('id_type', 'contact')->first();
+    }
+
+    /**
+     * Get policies
+     * 
+     * @return mixed
+     */
+    public function policies(){
+        return $this->scopeQuery(function($scope){
+            return $scope->where('id_type', 'policies');
+        })->paginate();
+    }
     
 }

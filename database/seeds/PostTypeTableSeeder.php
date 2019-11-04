@@ -13,9 +13,10 @@ class PostTypeTableSeeder extends Seeder
     {
         DB::table('post_types')->insert([
             ['id' => 'about', 'name' => 'About'],
-            ['id' => 'legal', 'name' => 'Legal'],
+            ['id' => 'policies', 'name' => 'Policies'],
             ['id' => 'news', 'name' => 'News'],
             ['id' => 'service', 'name' => 'Service'],
+            ['id' => 'contact', 'name' => 'Contact'],
         ]);
     }
 }

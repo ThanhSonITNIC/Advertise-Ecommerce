@@ -39,4 +39,5 @@ class Post extends Model implements Transformable
     public function watermark(){
         return json_decode($this->image)->urls->watermark ?? null;
     }
+
 }

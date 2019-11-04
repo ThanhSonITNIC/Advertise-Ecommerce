@@ -45,6 +45,8 @@
 
         while(numActive <= 0){
           url = url.substring(0, url.lastIndexOf("/"));
+          if(url == 'https' || url == 'http' || url == '')
+            break;
           $("#main-menu-navigation a").each(function() {
             if(url == (this.href)) {
                 $(this).closest("li").addClass("active");

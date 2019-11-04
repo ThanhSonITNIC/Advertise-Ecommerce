@@ -14,7 +14,7 @@
                     <div class="collapse navbar-collapse main-menu-item justify-content-end"
                         id="navbarSupportedContent">
                         <ul class="navbar-nav align-items-center">
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{route('guest.home')}}">Trang chủ</a>
                             </li>
                             <li class="nav-item">
@@ -33,6 +33,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('guest.news')}}">Tin tức</a>
                             </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{route('guest.policies')}}">Chính sách</a>
+                                </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('guest.contact')}}">Liên hệ</a>
                             </li>

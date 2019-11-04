@@ -59,7 +59,19 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                @include('front.projects.layouts.menu')
+                <div class="blog_right_sidebar">
+                    @include('front.projects.layouts.menu')
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">Tags</h4>
+                        <ul class="list">
+                            @foreach (explode(',', $project->tags) as $tag)
+                            <li>
+                                <a>{{$tag}}</a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </aside>
+                </div>
             </div>
         </div>
     </div>

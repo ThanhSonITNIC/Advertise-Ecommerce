@@ -35,7 +35,9 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                @include('front.projects.layouts.menu')
+                <div class="blog_right_sidebar">
+                    @include('front.projects.layouts.menu')
+                </div>
             </div>
         </div>
     </div>

@@ -20,12 +20,14 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::prefix('')->namespace('Guest')->middleware('levels')->name('guest.')->group(function(){
     Route::get('', 'HomeController@index')->name('home');
 
-    Route::get('about', 'AboutController@index')->name('about');
+    Route::get('about', 'NewsController@about')->name('about');
 
-    Route::get('contact', 'ContactController@index')->name('contact');
+    Route::get('contact', 'NewsController@contact')->name('contact');
     
+    Route::get('policies', 'NewsController@policies')->name('policies');
+
     Route::get('news', 'NewsController@index')->name('news');
-    Route::get('news/{id}', 'NewsController@show')->name('news.show');
+    Route::get('posts/{id}', 'NewsController@show')->name('news.show');
 
     Route::get('projects', 'ProjectsController@index')->name('projects');
     Route::get('projects/{id}', 'ProjectsController@show')->name('projects.show');
