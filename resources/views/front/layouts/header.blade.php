@@ -21,7 +21,7 @@
                                 <a class="nav-link" href="{{route('guest.about')}}">Giới thiệu</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{{route('guest.projects')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle dropdown-click" href="{{route('guest.projects')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Dự án
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -1468,9 +1468,15 @@ ul {
 /* line 789, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
 .blog_right_sidebar .popular_post_widget .post_item .media-body h3 {
   font-size: 16px;
-  line-height: 20px;
   margin-bottom: 6px;
   transition: all 0.3s linear;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-height: 1.5;        /* fallback */
+  max-height: 3;       /* fallback */
 }
 
 /* line 800, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
@@ -4465,7 +4471,6 @@ ul {
 
 /* line 19, E:/172 Etrain Education/172_Etrain_Education_html/sass/_testimonial_part.scss */
 .testimonial_part .textimonial_iner {
-  margin-left: 13%;
   overflow: hidden;
 }
 
@@ -4526,10 +4531,42 @@ ul {
 /* line 50, E:/172 Etrain Education/172_Etrain_Education_html/sass/_testimonial_part.scss */
 .testimonial_part .testimonial_slider_text {
   padding: 50px;
-  background-color: #fff;
-  box-shadow: 0px 10px 30px 0px rgba(12, 46, 96, 0.1);
+  background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
   z-index: 1;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+  height:250px;
+}
+
+.testimonial_part .testimonial_slider_text:hover {
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.7);
+}
+
+.testimonial_part .testimonial_slider_text p{
+  color: #e0e0e0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  line-height: 1.5;        /* fallback */
+  max-height: 6;       /* fallback */
+}
+
+.testimonial_part .testimonial_slider_text a{
+  color:white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-height: 1.2;        /* fallback */
+  max-height: 2.4;       /* fallback */
+}
+
+.testimonial_part .testimonial_slider_text a:hover{
+  color: rgb(229, 226, 255);
 }
 
 @media (max-width: 576px) {
@@ -4560,7 +4597,7 @@ ul {
   top: 59px;
   width: 148px;
   height: 124px;
-  background-image: url(../img/quote.png);
+  /* background-image: url(../img/quote.png); */
   content: "";
   background-size: cover;
   background-repeat: no-repeat;
@@ -4601,7 +4638,6 @@ ul {
 .testimonial_part .owl-dots {
   text-align: center;
   padding-top: 67px;
-  margin-left: -26%;
   line-height: 0px;
 }
 
@@ -6380,6 +6416,10 @@ h1, h2, h3, h4, h5, h6 {
   font-style: inherit !important;
 }
 
+.blog_part .single-home-blog, .blog_part .single-home-blog .card {
+  height: 100%;
+}
+
 @media (max-width: 576px) {
   /* line 23, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog_part.scss */
   .blog_part .single-home-blog {
@@ -6460,6 +6500,26 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: capitalize;
   -webkit-transition: 0.8s;
   transition: 0.8s;
+}
+
+.blog_part .single-home-blog .card .card-body h5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-height: 1.5;        /* fallback */
+  max-height: 3;       /* fallback */
+}
+
+.blog_part .single-home-blog .card .card-body p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-height: 1.5;        /* fallback */
+  max-height: 6;       /* fallback */
 }
 
 /* line 76, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog_part.scss */

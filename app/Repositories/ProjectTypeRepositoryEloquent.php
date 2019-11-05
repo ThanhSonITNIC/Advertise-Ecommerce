@@ -44,5 +44,20 @@ class ProjectTypeRepositoryEloquent extends BaseRepository implements ProjectTyp
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * Get list type with relation projects
+     * 
+     * @return mixed
+     */
+    public function allWithProjects(){
+        $types = $this->all();
+        $types->each(function($type){
+            $type->load(['projects' => function($query){
+                $query->limit(9)->orderBy('highlight', 'desc')->orderBy('created_at', 'desc');
+            }]);
+        });
+        return $types;
+    }
     
 }

@@ -11,5 +11,10 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ProjectTypeRepository extends RepositoryInterface
 {
-    //
+    /**
+     * Get list type with relation projects
+     * 
+     * @return mixed
+     */
+    public function allWithProjects();
 }

@@ -94,7 +94,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
 
         return $this->scopeQuery(function($scope){
             return $scope->where('highlight', true);
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('created_at', 'desc')->paginate();
     }
 
     /**

@@ -174,42 +174,49 @@ $('.counter').counterUp({
   }
 });
 
-// set active menu
-$(function(){
-  if($("#navbarSupportedContent a").length > 0){
-    var url = window.location.href;
-    var numActive = 0;
+  // set active menu
+  $(function(){
+    if($("#navbarSupportedContent a").length > 0){
+      var url = window.location.href;
+      var numActive = 0;
 
-    $("#navbarSupportedContent a").each(function() {
-        if(url == (this.href)) { 
-            numActive++;
-            $(this).closest("li").addClass("active");
-        }
-    });
-
-    while(url.lastIndexOf("?") > 0 && numActive <= 0){
-      url = url.substring(0, url.lastIndexOf("?"));
       $("#navbarSupportedContent a").each(function() {
-        if(url == (this.href)) {
-            $(this).closest("li").addClass("active");
-            numActive++;
-        }
+          if(url == (this.href)) { 
+              numActive++;
+              $(this).closest("li").addClass("active");
+          }
       });
-    }
 
-    while(numActive <= 0){
-      url = url.substring(0, url.lastIndexOf("/"));
-      if(url == 'https' || url == 'http' || url == '')
-        break;
-      $("#navbarSupportedContent a").each(function() {
-        if(url == (this.href)) {
-            $(this).closest("li").addClass("active");
-            numActive++;
-        }
-      });
+      while(url.lastIndexOf("?") > 0 && numActive <= 0){
+        url = url.substring(0, url.lastIndexOf("?"));
+        $("#navbarSupportedContent a").each(function() {
+          if(url == (this.href)) {
+              $(this).closest("li").addClass("active");
+              numActive++;
+          }
+        });
+      }
+
+      while(numActive <= 0){
+        url = url.substring(0, url.lastIndexOf("/"));
+        if(url == 'https' || url == 'http' || url == '')
+          break;
+        $("#navbarSupportedContent a").each(function() {
+          if(url == (this.href)) {
+              $(this).closest("li").addClass("active");
+              numActive++;
+          }
+        });
+      }
     }
-  }
-});
+  });
+
+  // enable click on dropdown
+  $('.dropdown-toggle.dropdown-click').click(function() {
+    var location = jQuery(this).attr('href');
+    window.location.href = location;
+    return false;
+  });
 
 
 
