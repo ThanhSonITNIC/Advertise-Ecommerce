@@ -1,9 +1,5 @@
 <!-- footer part start-->
 <footer class="footer-area">
-    <div class="fixed-bottom p-3" style="left:auto">
-        <a href="#" class="genric-btn success-border circle shadow"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></a>
-        <a href="#" class="genric-btn success-border circle shadow"><i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i></a>
-    </div>
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-sm-6 col-md-4 col-xl-3">

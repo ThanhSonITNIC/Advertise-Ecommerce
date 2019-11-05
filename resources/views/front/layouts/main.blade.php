@@ -35,6 +35,8 @@
 
     @yield('body')
 
+    @include('front.layouts.messenger.facebook')
+
     @include('front.layouts.footer')
 
     <!-- jquery plugins here-->
