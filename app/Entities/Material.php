@@ -26,13 +26,13 @@ class Material extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['code', 'name', 'price', 'quantity', 'description', 'id_unit', 'id_project'];
+    protected $fillable = ['id', 'name', 'price', 'quantity', 'description', 'id_unit', 'id_project'];
 
     public function unit(){
         return $this->belongsTo('App\Entities\Unit', 'id_unit');
     }
 
     public function projects(){
-        return $this->belongsToManys('App\Entities\Project', 'App\Entities\ProjectMaterial', 'id_material', 'id_project');
+        return $this->belongsToMany('App\Entities\Project', 'App\Entities\ProjectMaterial', 'id_material', 'id_project');
     }
 }

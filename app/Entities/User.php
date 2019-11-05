@@ -51,13 +51,8 @@ class User extends Authenticatable implements Transformable, MustVerifyEmail, Ca
         return $this->id_level == 'customer';
     }
 
-
     public function level(){
         return $this->belongsTo('App\Entities\Level', 'id_level');
-    }
-
-    public function projectComments(){
-        return $this->hasMany('App\Entities\ProjectComment', 'creator');
     }
 
     public function projects(){

@@ -48,12 +48,8 @@ class Project extends Model implements Transformable
         return $this->belongsTo('App\Entities\User', 'id_customer');
     }
 
-    public function comments(){
-        return $this->hasMany('App\Entities\ProjectComment', 'id_project');
-    }
-
     public function materials(){
-        return $this->belongsToManys('App\Entities\Material', 'App\Entities\ProjectMaterial', 'id_project', 'id_material');
+        return $this->belongsToMany('App\Entities\Material', 'App\Entities\ProjectMaterial', 'id_project', 'id_material');
     }
 
     public function image(){

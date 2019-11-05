@@ -20,7 +20,7 @@ class CreateMaterialsTable extends Migration
 			$table->string('name');
 			$table->decimal('price', 18, 3)->default(0);
 			$table->unsignedInteger('quantity')->default(0);
-			$table->text('description')->nullable();
+			$table->string('description')->nullable();
 			$table->string('id_unit', 30)->nullable();
 
 			$table->foreign('id_unit')->references('id')->on('units')->onUpdate('cascade')->onDelete('cascade');

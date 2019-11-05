@@ -20,7 +20,7 @@ class CreateImportMaterialsTable extends Migration
 			$table->string('id_material', 30);
 			$table->decimal('price', 18, 3)->default(0);
 			$table->unsignedInteger('quantity')->default(0);
-			$table->text('description')->nullable();
+			$table->string('description')->nullable();
 			$table->unsignedInteger('id_user');
 			$table->timestamps();
 

@@ -47,6 +47,22 @@
             @include(
                 'admin.layouts.navigation.item',
                 [
+                    'title' => 'Materials',
+                    'icon' => 'icon-ios-pie',
+                    'route' => 'admin.materials.index',
+                ]
+            )
+            @include(
+                'admin.layouts.navigation.item',
+                [
+                    'title' => 'Imports',
+                    'icon' => 'icon-archive',
+                    'route' => 'admin.import-materials.index',
+                ]
+            )
+            @include(
+                'admin.layouts.navigation.item',
+                [
                     'title' => 'Statistics',
                     'icon' => 'icon-stats-bars',
                 ]

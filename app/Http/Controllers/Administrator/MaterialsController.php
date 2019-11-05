@@ -49,7 +49,7 @@ class MaterialsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $materials = $this->repository->all();
+        $materials = $this->repository->paginate();
 
         if (request()->wantsJson()) {
 
@@ -58,7 +58,7 @@ class MaterialsController extends Controller
             ]);
         }
 
-        return view('materials.index', compact('materials'));
+        return view('admin.materials.index', compact('materials'));
     }
 
     /**
@@ -88,7 +88,7 @@ class MaterialsController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect(route('admin.materials.show', $material->id))->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -119,7 +119,7 @@ class MaterialsController extends Controller
             ]);
         }
 
-        return view('materials.show', compact('material'));
+        return view('admin.materials.show', compact('material'));
     }
 
     /**
@@ -133,7 +133,7 @@ class MaterialsController extends Controller
     {
         $material = $this->repository->find($id);
 
-        return view('materials.edit', compact('material'));
+        return view('admin.materials.edit', compact('material'));
     }
 
     /**
@@ -164,7 +164,7 @@ class MaterialsController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect(route('admin.materials.show', $material->id))->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -199,6 +199,10 @@ class MaterialsController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'Material deleted.');
+        return redirect(route('admin.materials.index'))->with('message', 'Material deleted.');
+    }
+
+    public function create(){
+        return view('admin.materials.create');
     }
 }

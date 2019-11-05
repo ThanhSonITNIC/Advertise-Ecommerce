@@ -19,7 +19,7 @@
                                 <form action="{{route('admin.users.destroy', $user->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn-link" type="submit"><i class="icon-trash"></i></button>
+                                    <button class="btn-link mr-2" type="submit"><i class="icon-trash danger cursor-pointer"></i></button>
                                 </form>
                             </li>
                             <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>

@@ -18,7 +18,19 @@ class MaterialValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'id' => 'required|max:30|alpha_dash',
+            'name' => 'required',
+            'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
+            'id_unit' => 'required|exists:units,id',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'id' => 'required|max:30|alpha_dash',
+            'name' => 'required',
+            'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
+            'id_unit' => 'required|exists:units,id',
+        ],
     ];
 }

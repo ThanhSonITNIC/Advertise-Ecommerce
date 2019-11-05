@@ -15,6 +15,15 @@ use App\Validators\MaterialValidator;
  */
 class MaterialRepositoryEloquent extends BaseRepository implements MaterialRepository
 {
+    protected $fieldSearchable = [
+        'id' => '=',
+        'name' => 'like',
+        'price' => '=',
+        'quantity' => '=',
+        'unit.name' => '=',
+        'description' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *

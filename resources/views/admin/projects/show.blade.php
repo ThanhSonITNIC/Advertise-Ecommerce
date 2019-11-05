@@ -48,7 +48,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>@lang('Budget')</label>
-                                            <input type="number" class="form-control" name="budget" value="{{$project->budget}}">
+                                            <input type="number" step="0.001" class="form-control" name="budget" value="{{$project->budget}}">
                                         </div>
                                     </div>
                                 </div>
