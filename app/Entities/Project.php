@@ -27,18 +27,26 @@ class Project extends Model implements Transformable
         'name',
         'slug',
         'description',
-        'content',
         'image',
-        'id_customer', //
-        'budget', //
+        'id_customer',
+        'budget',
         'highlight',
-        'start_at', //
-        'finish_at', //
-        'finished_at', //
+        'start_at',
+        'finish_at',
+        'finished_at',
         'id_type',
         'tags',
-        'published'
+        'published',
+        'content'
     ];
+
+    public function getContentAttribute(){
+        return $this->content()->first()->content;
+    }
+
+    public function content(){
+        return $this->hasOne('App\Entities\ProjectContent', 'id');
+    }
 
     public function type(){
         return $this->belongsTo('App\Entities\ProjectType', 'id_type');
@@ -48,8 +56,11 @@ class Project extends Model implements Transformable
         return $this->belongsTo('App\Entities\User', 'id_customer');
     }
 
+    // public function materials(){
+    //     return $this->belongsToMany('App\Entities\Material', 'App\Entities\ProjectMaterial', 'id_project', 'id_material');
+    // }
     public function materials(){
-        return $this->belongsToMany('App\Entities\Material', 'App\Entities\ProjectMaterial', 'id_project', 'id_material');
+        return $this->hasMany('App\Entities\ProjectMaterial', 'id_project');
     }
 
     public function image(){

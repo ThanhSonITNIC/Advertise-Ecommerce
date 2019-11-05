@@ -139,12 +139,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>@lang('Content')</label>
-                                    <input type="text" name='content' hidden>
-                                    <div id="toolbar-container"></div>
-                                    <div id="editor" class="form-control"></div>
-                                </div>
                             </div>
                             <div class="form-actions right">
                                 <button type="submit" class="btn btn-primary">
@@ -163,8 +157,6 @@
 @endsection
 
 @section('script')
-
-    @include('admin.layouts.editor.ckeditor5')
 
     @include('admin.layouts.components.image-upload', ['url' => route('admin.upload.post')])
 

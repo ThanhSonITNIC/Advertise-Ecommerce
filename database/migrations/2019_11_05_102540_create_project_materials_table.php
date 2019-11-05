@@ -16,7 +16,7 @@ class CreateProjectMaterialsTable extends Migration
 	public function up()
 	{
 		Schema::create('project_materials', function(Blueprint $table) {
-			$table->string('id', 30)->primary();
+			$table->increments('id');
 			$table->unsignedInteger('id_project');
 			$table->string('id_material', 30);
 			$table->decimal('price', 18, 3)->default(0);

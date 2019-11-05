@@ -87,7 +87,7 @@
 
                             <div class="form-actions right">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="icon-check2"></i> @lang('Create')
+                                    <i class="icon-check2"></i> @lang('Save')
                                 </button>
                             </div>
                         </form>

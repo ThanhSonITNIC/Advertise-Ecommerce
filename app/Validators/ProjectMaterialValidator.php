@@ -18,7 +18,15 @@ class ProjectMaterialValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'id_material' => 'required|exists:materials,id',
+            'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'id_material' => 'required|exists:materials,id',
+            'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
+        ],
     ];
 }

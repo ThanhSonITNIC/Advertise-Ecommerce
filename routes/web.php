@@ -51,6 +51,8 @@ Route::prefix('admin')->middleware(['auth', 'levels:admin'])->name('admin.')->gr
         Route::resource('posts', 'PostsController');
         Route::get('posts/type/{id}', 'PostsController@type')->name('posts.type');
 
+        Route::resource('project-contents', 'ProjectContentsController');
+
         Route::resource('project-materials', 'ProjectMaterialsController');
 
         Route::resource('import-materials', 'ImportMaterialsController');

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controller\Administrator;
+namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -15,7 +15,7 @@ use App\Validators\ImportMaterialLogValidator;
 /**
  * Class ImportMaterialLogsController.
  *
- * @package namespace App\Http\Controller\Administrator;
+ * @package namespace App\Http\Controllers\Administrator;
  */
 class ImportMaterialLogsController extends Controller
 {

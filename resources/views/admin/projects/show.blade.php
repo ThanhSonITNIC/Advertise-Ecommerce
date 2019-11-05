@@ -6,6 +6,7 @@
 
 <!-- Form start -->
 <section id="basic-form-layouts">
+    <!-- About -->
     <div class="row match-height">
         <div class="col-md-12">
             <div class="card">
@@ -14,6 +15,7 @@
                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
                             <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                         </ul>
                     </div>
@@ -142,60 +144,177 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-actions right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="icon-check2"></i> @lang('Save')
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Materials -->
+    <div class="row match-height">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Materials</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li>
+                                <button type="button" class="btn-link cursor-pointer" data-toggle="modal" data-target="#addMaterialForm">
+                                    <i class="icon-plus success"></i>
+                                </button>
+                            </li>
+                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body collapse in">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover sortable mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class='text-nowrap'>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Unit</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id='result'>
+                                @foreach ($project->materials as $index => $material)
+                                    <tr data-toggle="modal" data-target="#editMaterialForm-{{$material->id}}">
+                                        <th scope="row">{{$index+1}}</th>
+                                        <td class='text-nowrap'>{{$material->material->name}}</td>
+                                        <td>{{$material->price}}</td>
+                                        <td>{{$material->quantity}}</td>
+                                        <td class='text-nowrap'>{{$material->material->unit->name}}</td>
+                                        <td class='text-nowrap'>{{$material->description}}</td>
+                                    </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade text-xs-left" id="editMaterialForm-{{$material->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <form action="{{route('admin.project-materials.destroy', $material->id)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn-link cursor-pointer mr-2" type="submit"><i class="icon-trash danger"></i></button>
+                                                    </form>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <label class="modal-title text-text-bold-600" id="myModalLabel33">Material</label>
+                                                </div>
+                                                <form action="{{route('admin.project-materials.update', $material->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body">
+                                                        <label>Id material </label>
+                                                        <div class="form-group">
+                                                            <input type="text" name="id_material" max="30" class="form-control" value="{{$material->id_material}}" required>
+                                                        </div>
+                                                        <label>Price </label>
+                                                        <div class="form-group">
+                                                            <input type="number" name="price" step="0.001" min="0" class="form-control" value="{{$material->price}}" required>
+                                                        </div>
+                                                        <label>Quantity </label>
+                                                        <div class="form-group">
+                                                            <input type="number" name="quantity" min="0" class="form-control" value="{{$material->quantity}}" required>
+                                                        </div>
+                                                        <label>Description </label>
+                                                        <div class="form-group">
+                                                            <input type="text" name="description" class="form-control" value="{{$material->description}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Modal -->
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade text-xs-left" id="addMaterialForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="modal-title text-text-bold-600" id="myModalLabel33">Add material</label>
+                        </div>
+                        <form action="{{route('admin.project-materials.store')}}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+                                <input type="text" name="id_project" hidden value="{{$project->id}}">
+                                <label>Id material </label>
+                                <div class="form-group">
+                                    <input type="text" name="id_material" class="form-control" required>
+                                </div>
+                                <label>Price </label>
+                                <div class="form-group">
+                                    <input type="number" name="price" step="0.001" class="form-control" required>
+                                </div>
+                                <label>Quantity </label>
+                                <div class="form-group">
+                                    <input type="number" name="quantity" class="form-control" required>
+                                </div>
+                                <label>Description </label>
+                                <div class="form-group">
+                                    <input type="text" name="description" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-outline-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal -->
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="row match-height">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="basic-layout-colored-form-control">@lang('Content')</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body collapse in">
+                    <div class="card-block">
+                        <form class="form form-editor" method="POST" action="{{route('admin.project-contents.update', $project->id)}}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4 class="card-title">Materials</h4>
-                                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                                <div class="heading-elements">
-                                                    <ul class="list-inline mb-0">
-                                                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="card-body collapse in">
-                                                <div class="table-responsive">
-                                                    <table class="table table-bordered table-hover sortable mb-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th class='text-nowrap'>Name</th>
-                                                                <th>Price</th>
-                                                                <th>Quantity</th>
-                                                                <th>Unit</th>
-                                                                <th>Description</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id='result'>
-                                                            @foreach ($project->materials as $index => $material)
-                                                                <tr data-id="{{$material->id}}">
-                                                                    <th scope="row">{{$index+1}}</th>
-                                                                    <td class='text-nowrap'>{{$material->name}}</td>
-                                                                    <td>{{$material->price}}</td>
-                                                                    <td>{{$material->quantity}}</td>
-                                                                    <td class='text-nowrap'>{{$material->unit->name}}</td>
-                                                                    <td class='text-nowrap'>{{$material->description}}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Content</h4>
-                                        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                        <div class="heading-elements">
-                                            <ul class="list-inline mb-0">
-                                                <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="card-body collapse in">
                                         <div class="form-group mb-0">
                                             <input type="text" name='content' value="{{$project->content}}" hidden>
                                             <div id="toolbar-container"></div>
