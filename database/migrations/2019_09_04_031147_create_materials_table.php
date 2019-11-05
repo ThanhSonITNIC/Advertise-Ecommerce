@@ -16,17 +16,14 @@ class CreateMaterialsTable extends Migration
 	public function up()
 	{
 		Schema::create('materials', function(Blueprint $table) {
-            $table->increments('id');
-			$table->string('code', 30);
+            $table->string('id', 30)->primary();
 			$table->string('name');
 			$table->decimal('price', 18, 3)->default(0);
 			$table->unsignedInteger('quantity')->default(0);
 			$table->text('description')->nullable();
 			$table->string('id_unit', 30)->nullable();
-			$table->unsignedInteger('id_project');
 
 			$table->foreign('id_unit')->references('id')->on('units')->onUpdate('cascade')->onDelete('cascade');
-			$table->foreign('id_project')->references('id')->on('projects')->onUpdate('cascade')->onDelete('cascade');
 		});
 	}
 

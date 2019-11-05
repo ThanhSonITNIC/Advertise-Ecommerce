@@ -50,6 +50,12 @@ Route::prefix('admin')->middleware(['auth', 'levels:admin'])->name('admin.')->gr
     
         Route::resource('posts', 'PostsController');
         Route::get('posts/type/{id}', 'PostsController@type')->name('posts.type');
+
+        Route::resource('project-materials', 'ProjectMaterialsController');
+
+        Route::resource('import-materials', 'ImportMaterialsController');
+        
+        Route::resource('import-material-logs', 'ImportMaterialLogsController');
     });
 
     Route::prefix('upload')->namespace('Upload')->name('upload.')->group(function(){

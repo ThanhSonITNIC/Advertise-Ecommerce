@@ -7,29 +7,29 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class ProjectComment.
+ * Class ProjectMaterial.
  *
  * @package namespace App\Entities;
  */
-class ProjectComment extends Model implements Transformable
+class ProjectMaterial extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'project_comments';
+    protected $table = 'project_materials';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id_project', 'content', 'id_creator'];
-
-    public function creator(){
-        return $this->belongsTo('App\Entities\User', 'id_creator');
-    }
+    protected $fillable = ['id_project', 'id_material', 'price', 'quantity', 'description'];
 
     public function project(){
         return $this->belongsTo('App\Entities\Project', 'id_project');
+    }
+
+    public function material(){
+        return $this->belongsTo('App\Entities\Material', 'id_material');
     }
 
 }

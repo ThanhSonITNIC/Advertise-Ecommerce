@@ -19,6 +19,5 @@ class DatabaseSeeder extends Seeder
 
         $this->call(\ProjectTableSeeder::class);
         $this->call(\MaterialTableSeeder::class);
-        $this->call(\ProjectCommentTableSeeder::class);
     }
 }

@@ -32,7 +32,7 @@ class Material extends Model implements Transformable
         return $this->belongsTo('App\Entities\Unit', 'id_unit');
     }
 
-    public function project(){
-        return $this->belongsTo('App\Entities\Project', 'id_project');
+    public function projects(){
+        return $this->belongsToManys('App\Entities\Project', 'App\Entities\ProjectMaterial', 'id_material', 'id_project');
     }
 }

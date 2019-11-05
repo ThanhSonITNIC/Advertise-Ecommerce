@@ -53,7 +53,7 @@ class Project extends Model implements Transformable
     }
 
     public function materials(){
-        return $this->hasMany('App\Entities\Material', 'id_project');
+        return $this->belongsToManys('App\Entities\Material', 'App\Entities\ProjectMaterial', 'id_project', 'id_material');
     }
 
     public function image(){

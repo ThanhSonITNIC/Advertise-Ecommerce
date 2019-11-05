@@ -142,11 +142,66 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>@lang('Content')</label>
-                                    <input type="text" name='content' value="{{$project->content}}" hidden>
-                                    <div id="toolbar-container"></div>
-                                    <div id="editor" class="form-control"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Materials</h4>
+                                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                <div class="heading-elements">
+                                                    <ul class="list-inline mb-0">
+                                                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-body collapse in">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-hover sortable mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th class='text-nowrap'>Name</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
+                                                                <th>Unit</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id='result'>
+                                                            @foreach ($project->materials as $index => $material)
+                                                                <tr data-id="{{$material->id}}">
+                                                                    <th scope="row">{{$index+1}}</th>
+                                                                    <td class='text-nowrap'>{{$material->name}}</td>
+                                                                    <td>{{$material->price}}</td>
+                                                                    <td>{{$material->quantity}}</td>
+                                                                    <td class='text-nowrap'>{{$material->unit->name}}</td>
+                                                                    <td class='text-nowrap'>{{$material->description}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Content</h4>
+                                        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                        <div class="heading-elements">
+                                            <ul class="list-inline mb-0">
+                                                <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-body collapse in">
+                                        <div class="form-group mb-0">
+                                            <input type="text" name='content' value="{{$project->content}}" hidden>
+                                            <div id="toolbar-container"></div>
+                                            <div id="editor" class="form-control"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-actions right">
