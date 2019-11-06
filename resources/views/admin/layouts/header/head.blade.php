@@ -36,6 +36,10 @@
 <!-- BEGIN TAGS INPUT-->
 <link rel="stylesheet" type="text/css" href="css/bootstrap-tagsinput.css">
 <!-- END TAGS INPUT-->
+<!-- SELECT-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.css" />
+<!-- SELECT-->
+
 
 <!-- BEGIN Custom CSS-->
 <link rel="stylesheet" type="text/css" href="admin_assets/assets/css/text-line.css">

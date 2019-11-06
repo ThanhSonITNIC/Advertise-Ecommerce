@@ -58,6 +58,7 @@
                     'title' => 'Imports',
                     'icon' => 'icon-archive',
                     'route' => 'admin.import-materials.index',
+                    'disabled' => true,
                 ]
             )
             @include(
@@ -65,6 +66,7 @@
                 [
                     'title' => 'Statistics',
                     'icon' => 'icon-stats-bars',
+                    'disabled' => true,
                 ]
             )
             @include(

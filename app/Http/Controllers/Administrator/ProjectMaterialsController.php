@@ -73,7 +73,6 @@ class ProjectMaterialsController extends Controller
     public function store(ProjectMaterialCreateRequest $request)
     {
         try {
-
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $projectMaterial = $this->repository->create($request->all());

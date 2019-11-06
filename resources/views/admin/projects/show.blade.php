@@ -218,9 +218,10 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="modal-body">
-                                                        <label>Id material </label>
+                                                        <input type="hidden" name="id_material" value="{{$material->id_material}}">
+                                                        <label>Name </label>
                                                         <div class="form-group">
-                                                            <input type="text" name="id_material" max="30" class="form-control" value="{{$material->id_material}}" required>
+                                                            <a class="form-control" href="{{route('admin.materials.show', $material->id_material)}}">{{$material->material->name}}</a>
                                                         </div>
                                                         <label>Price </label>
                                                         <div class="form-group">
@@ -264,17 +265,19 @@
                             @csrf
                             <div class="modal-body">
                                 <input type="text" name="id_project" hidden value="{{$project->id}}">
-                                <label>Id material </label>
+                                
+                                <label>Material </label>
                                 <div class="form-group">
-                                    <input type="text" name="id_material" class="form-control" required>
+                                    <select class="selectpicker form-control" name="id_material" id="material" data-live-search="true" title="Select a material" data-hide-disabled="true" data-size="10" required></select>
                                 </div>
+
                                 <label>Price </label>
                                 <div class="form-group">
-                                    <input type="number" name="price" step="0.001" class="form-control" required>
+                                    <input type="number" name="price" min="0" step="0.001" class="form-control" required>
                                 </div>
                                 <label>Quantity </label>
                                 <div class="form-group">
-                                    <input type="number" name="quantity" class="form-control" required>
+                                    <input type="number" name="quantity" min="0" class="form-control" required>
                                 </div>
                                 <label>Description </label>
                                 <div class="form-group">
@@ -283,7 +286,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-outline-primary">Save</button>
+                                <button type="submit" class="btn btn-outline-primary">Add</button>
                             </div>
                         </form>
                     </div>
@@ -344,5 +347,7 @@
     @include('admin.layouts.editor.ckeditor5')
 
     @include('admin.layouts.components.image-upload', ['url' => route('admin.upload.post')])
+
+    @include('admin.projects.materials.create')
 
 @endsection
