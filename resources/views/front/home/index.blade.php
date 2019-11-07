@@ -54,6 +54,7 @@
 </section>
 <!--::blog_part end::-->
 <!--::blog_part start::-->
+@if($highlightPosts->count() > 2)
 <section class="blog_part">
     <div class="container">
         <div class="row justify-content-center">
@@ -71,6 +72,7 @@
         </div>
     </div>
 </section>
+@endif
 <!--::blog_part end::-->
 
 @endsection

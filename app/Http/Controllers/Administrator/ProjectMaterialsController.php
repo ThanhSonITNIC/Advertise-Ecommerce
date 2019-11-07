@@ -149,7 +149,14 @@ class ProjectMaterialsController extends Controller
     {
         try {
 
+            // validator
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            // validate quantity
+            $maxQuantity = $this->repository->find($id)->material->quantity;
+            $request->validate([
+                'quantity' => 'numeric|max:'.$maxQuantity,
+            ]);
 
             $projectMaterial = $this->repository->update($request->all(), $id);
 

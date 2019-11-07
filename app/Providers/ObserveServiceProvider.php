@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Entities\Project;
 use App\Observers\ProjectObserver;
+use App\Entities\ProjectMaterial;
+use App\Observers\ProjectMaterialObserver;
 
 class ObserveServiceProvider extends ServiceProvider
 {
@@ -27,5 +29,6 @@ class ObserveServiceProvider extends ServiceProvider
     public function boot()
     {
         Project::observe(ProjectObserver::class);
+        ProjectMaterial::observe(ProjectMaterialObserver::class);
     }
 }
