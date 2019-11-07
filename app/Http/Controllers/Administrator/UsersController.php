@@ -191,6 +191,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if($this->repository->find($id)->level->isAdmin())
+            return redirect()->back()->with('warning', "I'm god! you can't kill me.");
+        
         $deleted = $this->repository->delete($id);
 
         if (request()->wantsJson()) {
