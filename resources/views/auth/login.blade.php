@@ -15,7 +15,7 @@
                                         alt="branding logo"></div>
                             </div>
                             <h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2">
-                                <span>Login with Robust</span></h6>
+                                <span>Login with {{ config('app.name') }}</span></h6>
                         </div>
                         @include('admin.layouts.alert')
                         <div class="card-body collapse in">
@@ -53,6 +53,10 @@
                             <div class="">
                                 <p class="float-sm-left text-xs-center m-0"><a href="{{route('password.update')}}"
                                         class="card-link">Recover password</a></p>
+                            </div>
+                            <div class="">
+                                <p class="float-sm-right text-xs-center m-0"><a href="{{route('register')}}"
+                                        class="card-link">Register</a></p>
                             </div>
                         </div>
                     </div>

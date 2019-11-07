@@ -12,9 +12,11 @@
 */
 
 // auth
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
+// Route::get('email-must-verify', 'Guest\HomeController@index')->name('verification.notice');
 
 // guest
 Route::prefix('')->namespace('Guest')->middleware('levels')->name('guest.')->group(function(){
@@ -36,7 +38,7 @@ Route::prefix('')->namespace('Guest')->middleware('levels')->name('guest.')->gro
 });
 
 // admin
-Route::prefix('admin')->middleware(['auth', 'levels:admin'])->name('admin.')->group(function(){
+Route::prefix('admin')->middleware(['auth', 'verified', 'levels:admin'])->name('admin.')->group(function(){
 
     Route::namespace('Administrator')->group(function(){
         Route::get('', 'DashboardController@index')->name('dashboard');

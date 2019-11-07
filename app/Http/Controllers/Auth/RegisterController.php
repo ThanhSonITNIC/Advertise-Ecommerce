@@ -3,79 +3,88 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Entities\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserCreateRequest;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
-use App\Mails\Auth\MailRegister;
-use Mail;
-use Hash;
 
 class RegisterController extends Controller
 {
-    /**
-     * @var UserRepository
-     */
-    protected $repository;
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+    use RegistersUsers;
 
     /**
-     * @var UserValidator
-     */
-    protected $validator;
-
-    /**
-     * UsersController constructor.
+     * Where to redirect users after registration.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @var string
      */
-    public function __construct(UserRepository $repository, UserValidator $validator)
+    protected $redirectTo = '/login';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->middleware('guest');
     }
 
     /**
-     * Register user
-     * 
-     * @param UserCreateRequest $request
-     * @return redirect to send maill verify
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function register(UserCreateRequest $request){
-        try {
-            // update request
-            $request->request->add([
-                'id_level' => 'customer',
-                'password' => Hash::make($request->password),    
-            ]);
 
-            // validator
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            // create
-            $user = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'User created.',
-                'data'    => $user->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-        }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
     }
 
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'id_status' => 1
+        ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        $this->guard()->login($user);
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath())->with('success', 'A verification link has been sent to your email address.');
+    }
 }

@@ -1,20 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Mails\Auth\MailRegister;
-use Mail;
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\VerifyEmailRequest;
-use App\Http\Requests\SendVerifyEmailRequest;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Events\Verified;
 
 class VerificationController extends Controller
 {
@@ -28,98 +19,51 @@ class VerificationController extends Controller
     | be re-sent if the user didn't receive the original email message.
     |
     */
-
     use VerifiesEmails;
 
     /**
-     * @var UserRepository
-     */
-    protected $repository;
-
-    /**
-     * @var UserValidator
-     */
-    protected $validator;
-
-    /**
-     * PasswordResetsController constructor.
+     * Where to redirect users after verification.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @var string
      */
-    public function __construct(UserRepository $repository, UserValidator $validator)
+    protected $redirectTo = '/admin';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:10,1')->only('verify', 'resend');
-
-        $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
+    // BUG 🐞
     /**
-     * Send mail to verify
-     * 
-     * @param SendVerifyEmailRequest $request
+     * Mark the authenticated user's email address as verified.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function resend(SendVerifyEmailRequest $request){
-        try {
-            // validator
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            // create url
-            $url = Url::temporarySignedRoute('verification.verify', now()->addHour(), ['email' => $request->email]);
-
-            // send
-            Mail::to($request->email)->send(new MailRegister($url));
-
-            $response = [
-                'message' => 'Sent! Please check your mail',
-                'email'    => $request->email,
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
+    public function verify(Request $request)
+    {
+        if (! hash_equals((string) $request->route('id'), (string) $request->user()->email)) {
+            throw new AuthorizationException;
         }
-    }
 
-    /**
-     * Verify email
-     * 
-     * @param VerifyEmailRequest $request
-     */
-    public function verify(VerifyEmailRequest $request){
-        try {
-            // validator
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            
-            // verify
-            $user = $this->repository->verify($request->email);
+        // if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
+        //     throw new AuthorizationException;
+        // }
 
-            $response = [
-                'message' => 'Email Verified',
-                'data'    => $user->toArray(),
-            ];
-
-            return response()->json($response);
-
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect($this->redirectPath());
         }
+        if ($request->user()->markEmailAsVerified()) {
+            event(new Verified($request->user()));
+        }
+        return redirect($this->redirectPath())->with('success', "Validation successful");
     }
-
 }

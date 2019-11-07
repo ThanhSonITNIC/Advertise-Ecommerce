@@ -25,12 +25,14 @@ class Levels
         if(count($levels) > 0){
             // check level access
             if(!in_array(Auth::user()->id_level, $levels)){
-                return abort(403, 'Access denied');
+                Auth::logout();
+                return redirect(route('login'))->with('error', 'Access denied');
             }
 
             // check blocked
             if(Auth::user()->status->blocked()){
-                return abort(403, 'Access denied - The account has been locked');
+                Auth::logout();
+                return redirect(route('login'))->with('error', 'Your account has been locked');
             }
         }
         

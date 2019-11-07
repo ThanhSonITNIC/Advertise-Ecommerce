@@ -7,10 +7,10 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\VerifyEmail;
 
 /**
  * Class User.
@@ -20,7 +20,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements Transformable, MustVerifyEmail, CanResetPassword
 {
     use TransformableTrait;
-    use HasApiTokens, Notifiable, CanResetPasswordTrait;
+    use Notifiable, CanResetPasswordTrait;
 
     protected $table = 'users';
 
@@ -57,6 +57,20 @@ class User extends Authenticatable implements Transformable, MustVerifyEmail, Ca
 
     public function status(){
         return $this->belongsTo('App\Entities\UserStatus', 'id_status');
+    }
+
+    public function getEmailForVerification(){
+        return $this->email;
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
     }
 
 }
