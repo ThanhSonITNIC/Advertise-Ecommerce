@@ -7,17 +7,15 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Level.
+ * Class UserStatus.
  *
  * @package namespace App\Entities;
  */
-class Level extends Model implements Transformable
+class UserStatus extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'levels';
-
-    public $incrementing = false;
+    protected $table = 'user_statuses';
 
     public $timestamps = false;
 
@@ -26,14 +24,17 @@ class Level extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['name'];
 
     public function users(){
-        $this->hasMany('App\Entities\User', 'id_level');
+        return $this->hasMany('App\Entities\User', 'id_status');
     }
 
-    public function isAdmin(){
-        return $this->id == 'admin';
+    public function alive(){
+        return $this->id == 1;
     }
 
+    public function blocked(){
+        return $this->id == 2;
+    }
 }

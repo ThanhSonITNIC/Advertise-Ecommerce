@@ -26,11 +26,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('provider')->nullable();
             $table->string('id_provider')->nullable();
-            $table->integer('status')->default(1);
+            $table->unsignedInteger('id_status');
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('id_level')->references('id')->on('levels')->onUpdate('cascade');
+			$table->foreign('id_level')->references('id')->on('levels')->onUpdate('cascade');
+			$table->foreign('id_status')->references('id')->on('user_statuses')->onUpdate('cascade');
 		});
 	}
 

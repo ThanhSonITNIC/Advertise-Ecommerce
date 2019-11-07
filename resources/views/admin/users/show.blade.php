@@ -69,12 +69,22 @@
                                 <h4 class="form-section"><i class="icon-locked"></i> @lang('Access')</h4>
 
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>@lang('Level')</label>
                                             <select class="form-control" name="id_level">
                                                 @foreach ($levels as $level)
                                                     <option value="{{$level->id}}" @if($level->id == $user->id_level) selected @endif>{{$level->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>@lang('Status')</label>
+                                            <select class="form-control" name="id_status">
+                                                @foreach ($userStatuses as $status)
+                                                    <option value="{{$status->id}}" @if($status->id == $user->id_status) selected @endif>{{$status->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

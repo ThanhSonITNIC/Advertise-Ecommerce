@@ -32,7 +32,7 @@ class User extends Authenticatable implements Transformable, MustVerifyEmail, Ca
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'email', 'tel', 'address', 'provider', 'id_provider', 'id_level', 'status', 'password'];
+    protected $fillable = ['id', 'name', 'email', 'tel', 'address', 'provider', 'id_provider', 'id_level', 'id_status', 'password'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,14 +42,6 @@ class User extends Authenticatable implements Transformable, MustVerifyEmail, Ca
     protected $hidden = [
         'password', 'remember_token', 'id_provider'
     ];
-
-    public function isAdmin(){
-        return $this->id_level == 'admin';
-    }
-
-    public function isCustomer(){
-        return $this->id_level == 'customer';
-    }
 
     public function level(){
         return $this->belongsTo('App\Entities\Level', 'id_level');
@@ -61,6 +53,10 @@ class User extends Authenticatable implements Transformable, MustVerifyEmail, Ca
 
     public function posts(){
         return $this->hasMany('App\Entities\Post', 'author');
+    }
+
+    public function status(){
+        return $this->belongsTo('App\Entities\UserStatus', 'id_status');
     }
 
 }
