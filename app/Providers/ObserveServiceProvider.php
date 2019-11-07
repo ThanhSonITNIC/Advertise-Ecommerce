@@ -8,6 +8,8 @@ use App\Entities\Project;
 use App\Observers\ProjectObserver;
 use App\Entities\ProjectMaterial;
 use App\Observers\ProjectMaterialObserver;
+use App\Entities\ImportMaterial;
+use App\Observers\ImportMaterialObserver;
 
 class ObserveServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,6 @@ class ObserveServiceProvider extends ServiceProvider
     {
         Project::observe(ProjectObserver::class);
         ProjectMaterial::observe(ProjectMaterialObserver::class);
+        ImportMaterial::observe(ImportMaterialObserver::class);
     }
 }

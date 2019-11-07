@@ -15,6 +15,15 @@ use App\Validators\ImportMaterialValidator;
  */
 class ImportMaterialRepositoryEloquent extends BaseRepository implements ImportMaterialRepository
 {
+    protected $fieldSearchable = [
+        'material.name' => 'like',
+        'price' => '=',
+        'quantity' => '=',
+        'description' => 'like',
+        'user.name' => 'like',
+        'created_at' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *

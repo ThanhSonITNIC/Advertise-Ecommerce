@@ -43,9 +43,6 @@
                 dataType: "json",
                 success: function (data) {
                     $('input[name=price]').val(data.data.price);
-                    $('input[name=description]').val(data.data.description);
-                    $('input[name=quantity]').attr("max", data.data.quantity);
-                    $('input[name=quantity]').val(data.data.quantity);
                 },
                 error: function (jqXhr, textStatus, errorMessage) {
                     console.log(errorMessage);

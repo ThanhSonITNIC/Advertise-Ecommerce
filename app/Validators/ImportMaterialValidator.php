@@ -18,7 +18,11 @@ class ImportMaterialValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'id_material' => 'required|exists:materials,id',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|numeric|min:1',
+        ],
         ValidatorInterface::RULE_UPDATE => [],
     ];
 }

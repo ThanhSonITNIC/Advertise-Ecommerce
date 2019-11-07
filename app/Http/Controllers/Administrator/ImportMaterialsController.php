@@ -49,16 +49,16 @@ class ImportMaterialsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $importMaterials = $this->repository->all();
+        $imports = $this->repository->paginate();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $importMaterials,
+                'data' => $imports,
             ]);
         }
 
-        return view('importMaterials.index', compact('importMaterials'));
+        return view('admin.imports.index', compact('imports'));
     }
 
     /**
@@ -73,14 +73,16 @@ class ImportMaterialsController extends Controller
     public function store(ImportMaterialCreateRequest $request)
     {
         try {
+            // update request
+            $request->request->add(['id_user' => auth()->id()]);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $importMaterial = $this->repository->create($request->all());
+            $import = $this->repository->create($request->all());
 
             $response = [
                 'message' => 'ImportMaterial created.',
-                'data'    => $importMaterial->toArray(),
+                'data'    => $import->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +112,16 @@ class ImportMaterialsController extends Controller
      */
     public function show($id)
     {
-        $importMaterial = $this->repository->find($id);
+        $import = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $importMaterial,
+                'data' => $import,
             ]);
         }
 
-        return view('importMaterials.show', compact('importMaterial'));
+        return view('admin.imports.show', compact('import'));
     }
 
     /**
@@ -131,9 +133,9 @@ class ImportMaterialsController extends Controller
      */
     public function edit($id)
     {
-        $importMaterial = $this->repository->find($id);
+        $import = $this->repository->find($id);
 
-        return view('importMaterials.edit', compact('importMaterial'));
+        return view('admin.imports.edit', compact('import'));
     }
 
     /**
@@ -152,11 +154,11 @@ class ImportMaterialsController extends Controller
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $importMaterial = $this->repository->update($request->all(), $id);
+            $import = $this->repository->update($request->all(), $id);
 
             $response = [
                 'message' => 'ImportMaterial updated.',
-                'data'    => $importMaterial->toArray(),
+                'data'    => $import->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -200,5 +202,9 @@ class ImportMaterialsController extends Controller
         }
 
         return redirect()->back()->with('message', 'ImportMaterial deleted.');
+    }
+
+    public function create(){
+        return view('admin.imports.create');
     }
 }
