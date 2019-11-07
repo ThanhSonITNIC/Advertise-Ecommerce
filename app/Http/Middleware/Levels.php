@@ -22,16 +22,17 @@ class Levels
      */
     public function handle($request, Closure $next, ...$levels)
     {
-        // check block
-        if(Auth::user()->status->blocked()){
-            return abort(403, 'Access denied - The account has been locked');
-        }
-
-        // check level access
-        if(count($levels) > 0)
+        if(count($levels) > 0){
+            // check level access
             if(!in_array(Auth::user()->id_level, $levels)){
                 return abort(403, 'Access denied');
             }
+
+            // check blocked
+            if(Auth::user()->status->blocked()){
+                return abort(403, 'Access denied - The account has been locked');
+            }
+        }
         
         View::share('levels', Level::all());
         View::share('userStatuses', UserStatus::all());
