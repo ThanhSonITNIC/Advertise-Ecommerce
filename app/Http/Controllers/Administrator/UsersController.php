@@ -9,8 +9,10 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\PasswordUpdateRequest;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
+use Hash;
 
 /**
  * Class UsersController.
@@ -200,5 +202,14 @@ class UsersController extends Controller
         }
 
         return redirect()->back()->with('message', 'User deleted.');
+    }
+
+    public function updatePassword(PasswordUpdateRequest $request, $id){
+        $user = $this->repository->find($id);
+        if(Hash::check($request->current_password, $user->password)){
+            $user->update(['password' => Hash::make($request->password)]);
+            return redirect()->back()->with('message', 'Password updated.');
+        }
+        return redirect()->back()->with('error', 'Incorrect password.');
     }
 }

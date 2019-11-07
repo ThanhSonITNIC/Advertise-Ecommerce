@@ -69,27 +69,13 @@
                                 <h4 class="form-section"><i class="icon-locked"></i> @lang('Access')</h4>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>@lang('Level')</label>
                                             <select class="form-control" name="id_level">
-                                                {{-- @foreach ($m_levels as $level)
+                                                @foreach ($levels as $level)
                                                     <option value="{{$level->id}}" @if($level->id == $user->id_level) selected @endif>{{$level->name}}</option>
-                                                @endforeach --}}
-                                                <option>xxx</option>
-                                                <option>xxx</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>@lang('Status')</label>
-                                            <select class="form-control" name="id_status">
-                                                {{-- @foreach ($m_statususer as $status)
-                                                    <option value="{{$status->id}}" @if($status->id == $user->id_status) selected @endif>{{$status->name}}</option>
-                                                @endforeach --}}
-                                                <option>xxx</option>
-                                                <option>xxx</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -124,7 +110,7 @@
                 </div>
                 <div class="card-body collapse in">
                     <div class="card-block">
-                        <form class="form" method="POST" action="">
+                        <form class="form" method="POST" action="{{route('admin.users.password.update', $user->id)}}">
                             @csrf
                             @method('PUT')
                             <h4 class="form-section"><i class="icon-edit"></i> @lang('Change')</h4>
@@ -143,29 +129,12 @@
                             <div class="form-body">
                                 <div class="form-group">
                                     <label>@lang('Confirm password')</label>
-                                    <input class="form-control" type="password" name="confirm_password" required>
+                                    <input class="form-control" type="password" name="password_confirmation" required>
                                 </div>
                             </div>
                             <div class="form-actions right">
                                 <button type="submit" name="save" class="btn btn-primary">
-                                    <i class="icon-check2"></i> @lang('Change')
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-block">
-                        <form class="form" method="POST" action="">
-                            @csrf
-                            <h4 class="form-section"><i class="icon-loop"></i>@lang('Reset')</h4>
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label>@lang('Email')</label>
-                                    <input class="form-control" type="email" name="email" value='{{$user->email}}' required>
-                                </div>
-                            </div>
-                            <div class="form-actions right">
-                                <button type="submit" name="save" class="btn btn-primary">
-                                    <i class="icon-check2"></i> @lang('Send')
+                                    <i class="icon-check2"></i> @lang('Update')
                                 </button>
                             </div>
                         </form>

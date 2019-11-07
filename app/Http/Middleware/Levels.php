@@ -8,6 +8,7 @@ use View;
 use App\Entities\PostType;
 use App\Entities\ProjectType;
 use App\Entities\Unit;
+use App\Entities\Level;
 
 class Levels
 {
@@ -26,6 +27,7 @@ class Levels
                 return abort(403, 'Access denied');
             }
         
+        View::share('levels', Level::all());
         View::share('postTypes', PostType::all());
         View::share('projectTypes', ProjectType::all());
         View::share('units', Unit::all());

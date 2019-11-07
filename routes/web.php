@@ -42,6 +42,7 @@ Route::prefix('admin')->middleware(['auth', 'levels:admin'])->name('admin.')->gr
         Route::get('', 'DashboardController@index')->name('dashboard');
 
         Route::resource('users', 'UsersController');
+        Route::put('users/{id}/password/update', 'UsersController@updatePassword')->name('users.password.update');
     
         Route::resource('projects', 'ProjectsController');
         Route::get('projects/type/{id}', 'ProjectsController@type')->name('projects.type');
