@@ -6,11 +6,11 @@
 <!-- Search start -->
 @php
     $searchFields = [
+        ['value' => '', 'display' => 'All'],
         ['value' => 'name', 'display' => 'Name'],
         ['value' => 'email', 'display' => 'Email'],
         ['value' => 'tel', 'display' => 'Telephone'],
         ['value' => 'address', 'display' => 'Address'],
-        ['value' => 'status', 'display' => 'Status'],
     ];
 @endphp
 @include('admin.layouts.search.index', $searchFields)
