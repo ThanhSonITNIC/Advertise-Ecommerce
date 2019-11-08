@@ -71,7 +71,7 @@
             @include(
                 'admin.layouts.navigation.item',
                 [
-                    'title' => 'Settings',
+                    'title' => 'Setups',
                     'icon' => 'icon-settings',
                     'subRoute' => 'admin.posts.show',
                     'sub' => [
@@ -80,6 +80,16 @@
                         ['id' => 'level', 'name' => 'Level'],
                     ],
                     'disabled' => true,
+                ]
+            )
+            @include(
+                'admin.layouts.navigation.item',
+                [
+                    'title' => 'Settings',
+                    'icon' => 'icon-android-settings',
+                    'sub' => [
+                        ['id' => 'admin.configures.logo', 'name' => 'Logo'],
+                    ],
                 ]
             )
         </ul>

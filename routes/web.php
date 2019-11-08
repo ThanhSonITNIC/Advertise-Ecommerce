@@ -16,7 +16,6 @@ Auth::routes(['verify' => true]);
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('register', 'Auth\RegisterController@register')->name('register');
-// Route::get('email-must-verify', 'Guest\HomeController@index')->name('verification.notice');
 
 // guest
 Route::prefix('')->namespace('Guest')->middleware('levels')->name('guest.')->group(function(){
@@ -61,11 +60,20 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'levels:admin'])->name('
         Route::resource('import-materials', 'ImportMaterialsController');
         
         Route::resource('import-material-logs', 'ImportMaterialLogsController');
+
+        // configures
+        // Route::resource('configures', 'ConfiguresController')->except('show');
+        // Route::get('configures/{id}', 'ConfiguresController@show')->name('configures.show');
+
+        Route::prefix('configures')->namespace('Configures')->name('configures.')->group(function(){
+            Route::get('logo', 'LogoController@index')->name('logo');
+        });
     });
 
     Route::prefix('upload')->namespace('Upload')->name('upload.')->group(function(){
         Route::post('images/post', 'ImagesController@post')->name('post');
         Route::post('images/article', 'ImagesController@article')->name('article');
+        Route::post('images/logo', 'ImagesController@logo')->name('logo');
     });
 
 });

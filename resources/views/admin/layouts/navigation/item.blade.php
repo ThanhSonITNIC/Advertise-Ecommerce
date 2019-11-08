@@ -2,7 +2,7 @@
     $route : route name index. route($route)
     $icon : icon class
     $subRoute : route name sub items. route($subRoute, id)
-    $sub : [['id'=>'', 'name'=>''],...]
+    $sub : [['id'=>'', 'name'=>''],...] : if $subRoute not set then id is route
     $title
     $disabled : any value = true. default false
     $tag
@@ -21,6 +21,16 @@
         @foreach ($sub as $item)
         <li>
             <a href="{{route($subRoute, $item['id'])}}" data-i18n="nav.cards.card_bootstrap" class="menu-item">
+                {{$item['name']}}
+            </a>
+        </li>
+        @endforeach
+    </ul>
+    @elseif(isset($sub))
+    <ul class="menu-content">
+        @foreach ($sub as $item)
+        <li>
+            <a href="{{route($item['id'])}}" data-i18n="nav.cards.card_bootstrap" class="menu-item">
                 {{$item['name']}}
             </a>
         </li>

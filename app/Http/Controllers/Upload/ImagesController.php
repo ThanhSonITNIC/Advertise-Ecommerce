@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\File\ImagePostUpload;
 use App\File\ImageArticleUpload;
+use App\File\LogoUpload;
 use App\Http\Requests\ImageUploadRequest;
 
 class ImagesController extends Controller
@@ -16,5 +17,9 @@ class ImagesController extends Controller
 
     public function article(ImageUploadRequest $request){
         return (new ImageArticleUpload())->upload($request->file()['upload']);
+    }
+
+    public function logo(ImageUploadRequest $request){
+        return (new LogoUpload($request->name))->upload($request->file()['upload']);
     }
 }

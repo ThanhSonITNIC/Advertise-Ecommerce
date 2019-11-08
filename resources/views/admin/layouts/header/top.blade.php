@@ -7,9 +7,9 @@
                         class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a>
                 </li>
                 <li class="nav-item"><a href="index.html" class="navbar-brand nav-link"><img alt="branding logo"
-                            src="admin_assets/app-assets/images/logo/robust-logo-light.png"
-                            data-expand="admin_assets/app-assets/images/logo/robust-logo-light.png"
-                            data-collapse="admin_assets/app-assets/images/logo/robust-logo-small.png"
+                            src="storage/images/logo/logo-light"
+                            data-expand="storage/images/logo/logo-light"
+                            data-collapse="storage/images/logo/logo-small"
                             class="brand-logo"></a></li>
                 <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile"
                         class="nav-link open-navbar-container"><i

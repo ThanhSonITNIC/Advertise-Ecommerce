@@ -12,9 +12,9 @@ class Logo{
      */
     public function get(){
         return[
-            new Image('storage/images/logo','logo-light.png', 117, 25),
-            new Image('storage/images/logo', 'logo-dark.png', 117, 25),
-            new Image('storage/images/logo', 'logo-small.png', 32, 18)
+            new Image('storage/images/logo','logo-light', 117, 25),
+            new Image('storage/images/logo', 'logo-dark', 117, 25),
+            new Image('storage/images/logo', 'logo-small', 32, 18)
         ];
     }
 }
