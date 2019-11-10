@@ -58,7 +58,7 @@ class PostTypesController extends Controller
             ]);
         }
 
-        return view('postTypes.index', compact('postTypes'));
+        return view('admin.setups.post-types', compact('postTypes'));
     }
 
     /**

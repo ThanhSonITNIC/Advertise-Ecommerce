@@ -58,7 +58,7 @@ class ProjectTypesController extends Controller
             ]);
         }
 
-        return view('projectTypes.index', compact('projectTypes'));
+        return view('admin.setups.project-types', compact('projectTypes'));
     }
 
     /**

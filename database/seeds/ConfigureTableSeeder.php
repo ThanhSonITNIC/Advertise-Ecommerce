@@ -12,7 +12,6 @@ class ConfigureTableSeeder extends Seeder
     public function run()
     {
         DB::table('configures')->insert([
-            ['key' => 'logo'],
             ['key' => 'email'],
             ['key' => 'tel'],
             ['key' => 'address'],

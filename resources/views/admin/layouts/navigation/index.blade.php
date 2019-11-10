@@ -73,13 +73,13 @@
                 [
                     'title' => 'Setups',
                     'icon' => 'icon-settings',
-                    'subRoute' => 'admin.posts.show',
                     'sub' => [
-                        ['id' => 'post', 'name' => 'Post'],
-                        ['id' => 'project', 'name' => 'Project'],
-                        ['id' => 'level', 'name' => 'Level'],
+                        ['id' => 'admin.units.index', 'name' => 'Units'],
+                        ['id' => 'admin.project-types.index', 'name' => 'Project types'],
+                        ['id' => 'admin.post-types.index', 'name' => 'Post types'],
+                        ['id' => 'admin.levels.index', 'name' => 'Levels'],
+                        ['id' => 'admin.user-statuses.index', 'name' => 'User statuses'],
                     ],
-                    'disabled' => true,
                 ]
             )
             @include(
@@ -89,6 +89,7 @@
                     'icon' => 'icon-android-settings',
                     'sub' => [
                         ['id' => 'admin.configures.logo', 'name' => 'Logo'],
+                        ['id' => 'admin.configures.index', 'name' => 'Orthers'],
                     ],
                 ]
             )

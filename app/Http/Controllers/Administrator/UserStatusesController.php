@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -58,7 +58,7 @@ class UserStatusesController extends Controller
             ]);
         }
 
-        return view('userStatuses.index', compact('userStatuses'));
+        return view('admin.setups.user-statuses', compact('userStatuses'));
     }
 
     /**

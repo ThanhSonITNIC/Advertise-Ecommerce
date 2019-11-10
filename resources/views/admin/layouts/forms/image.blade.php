@@ -30,7 +30,7 @@
         <div class="row">
             <input type="text" hidden name="image{{urlencode($name) ?? null}}" value="{{$name ?? null}}">
             <input id="image{{urlencode($name) ?? null}}" type="file" hidden accept="image/*" class="custom-file-input">
-            <label for="image{{urlencode($name) ?? null}}">
+            <label class="cursor-pointer" for="image{{urlencode($name) ?? null}}">
                 <img id="review{{urlencode($name) ?? null}}" class="img-fluid form-control" src="{{$image}}" alt="Choose image">
             </label>
         </div>

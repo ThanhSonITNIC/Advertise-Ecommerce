@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Administrator;
+namespace App\Http\Controllers\Administrator\Configures;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ use App\Validators\ConfigureValidator;
 /**
  * Class ConfiguresController.
  *
- * @package namespace App\Http\Controllers\Administrator;
+ * @package namespace App\Http\Controllers\Administrator\Configures;
  */
 class ConfiguresController extends Controller
 {
@@ -58,7 +58,7 @@ class ConfiguresController extends Controller
             ]);
         }
 
-        return view('configures.index', compact('configures'));
+        return view('admin.configures.index', compact('configures'));
     }
 
     /**
@@ -119,7 +119,7 @@ class ConfiguresController extends Controller
             ]);
         }
 
-        return view('configures.show', compact('configure'));
+        return view('admin.configures.show', compact('configure'));
     }
 
     /**
@@ -133,7 +133,7 @@ class ConfiguresController extends Controller
     {
         $configure = $this->repository->find($id);
 
-        return view('configures.edit', compact('configure'));
+        return view('admin.configures.edit', compact('configure'));
     }
 
     /**
@@ -148,6 +148,7 @@ class ConfiguresController extends Controller
      */
     public function update(ConfigureUpdateRequest $request, $id)
     {
+
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);

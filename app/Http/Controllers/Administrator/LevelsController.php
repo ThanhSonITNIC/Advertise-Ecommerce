@@ -58,7 +58,7 @@ class LevelsController extends Controller
             ]);
         }
 
-        return view('levels.index', compact('levels'));
+        return view('admin.setups.levels', compact('levels'));
     }
 
     /**

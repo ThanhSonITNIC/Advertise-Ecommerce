@@ -18,7 +18,13 @@ class UnitValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'id' => 'required|alpha_dash|max:30|unique:units,id',
+            'name' => 'required'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'id' => 'required|alpha_dash|max:30',
+            'name' => 'required'
+        ],
     ];
 }

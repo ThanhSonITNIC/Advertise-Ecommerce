@@ -61,13 +61,15 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'levels:admin'])->name('
         
         Route::resource('import-material-logs', 'ImportMaterialLogsController');
 
-        // configures
-        // Route::resource('configures', 'ConfiguresController')->except('show');
-        // Route::get('configures/{id}', 'ConfiguresController@show')->name('configures.show');
+        Route::get('configures/logo', 'Configures\LogoController@index')->name('configures.logo');
+        Route::resource('configures', 'Configures\ConfiguresController');
 
-        Route::prefix('configures')->namespace('Configures')->name('configures.')->group(function(){
-            Route::get('logo', 'LogoController@index')->name('logo');
-        });
+        Route::resource('units', 'UnitsController');
+        Route::resource('levels', 'LevelsController');
+        Route::resource('project-types', 'ProjectTypesController');
+        Route::resource('post-types', 'PostTypesController');
+        Route::resource('user-statuses', 'UserStatusesController');
+
     });
 
     Route::prefix('upload')->namespace('Upload')->name('upload.')->group(function(){

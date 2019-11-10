@@ -58,7 +58,7 @@ class UnitsController extends Controller
             ]);
         }
 
-        return view('units.index', compact('units'));
+        return view('admin.setups.units', compact('units'));
     }
 
     /**
