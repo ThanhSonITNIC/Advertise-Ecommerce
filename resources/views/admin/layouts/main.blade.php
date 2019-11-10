@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-textdirection="ltr" class="loading">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-textdirection="ltr" class="loading">
   <head>
     @include('admin.layouts.header.head')
   </head>

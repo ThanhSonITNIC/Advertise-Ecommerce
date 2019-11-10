@@ -1,9 +1,13 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Dashboard')
+@endsection
+
 @section('body')
 
 <div class="row">
-    <div class="col-xl-3 col-lg-6 col-xs-12">
+    {{-- <div class="col-xl-3 col-lg-6 col-xs-12">
         <div class="card">
             <div class="card-body">
                 <div class="card-block">
@@ -70,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @endsection

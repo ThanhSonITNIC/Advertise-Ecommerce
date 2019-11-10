@@ -1,5 +1,9 @@
 @extends('auth.main')
 
+@section('title')
+@lang('Reset password')
+@endsection
+
 @section('body')
 <div class="app-content content container-fluid">
     <div class="content-wrapper">
@@ -11,7 +15,7 @@
                     <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
                         <div class="card-header no-border pb-0">
                             <div class="card-title text-xs-center">
-                                <img src="storage/images/logo/logo-dark" alt="branding logo">
+                                <img src="storage/images/logo/logo-dark.png" alt="branding logo">
                             </div>
                             <h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>We
                                     will send you a link to reset your password.</span></h6>

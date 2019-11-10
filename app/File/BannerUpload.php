@@ -3,14 +3,15 @@
 namespace App\File;
 
 use App\File\ImageUpload;
+use App\File\Image;
 
-class SlideUpload extends ImageUpload{
+class BannerUpload extends ImageUpload{
     /**
-     * Path to upload logo
+     * Path to upload banner
      * 
      * @var string
      */
-    public $path = "storage/images/slider";
+    public $path = "storage/images/banner";
     
     public function __construct($fileName){
         $image = new Image($this->path, $fileName);

@@ -10,6 +10,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use App\Repositories\PostRepository;
 use App\Repositories\ProjectTypeRepository;
 use View;
+use App\Criteria\PostCriteria;
 
 class HomeController extends Controller
 {
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $this->repository = $repository;
         $this->projectTypeRepository  = $projectTypeRepository;
 
+        $this->repository->pushCriteria(PostCriteria::class);
         View::share('highlightPosts', $this->repository->highlights());
     }
 

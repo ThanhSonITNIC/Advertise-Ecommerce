@@ -12,6 +12,7 @@ use App\Http\Requests\ProjectUpdateRequest;
 use App\Repositories\ProjectRepository;
 use App\Validators\ProjectValidator;
 use View;
+use App\Criteria\ProjectCriteria;
 
 /**
  * Class ProjectsController.
@@ -43,6 +44,7 @@ class ProjectsController extends Controller
         $this->repository = $repository;
         $this->validator  = $validator;
 
+        $this->repository->pushCriteria(ProjectCriteria::class);
         View::share('highlightProjects', $this->repository->highlights());
     }
 

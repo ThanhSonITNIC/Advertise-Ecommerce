@@ -4,44 +4,36 @@
         <div class="row justify-content-between">
             <div class="col-sm-6 col-md-4 col-xl-3">
                 <div class="single-footer-widget footer_1">
-                    <a href="index.html"> <img src="/front_assets/img/logo.png" alt=""> </a>
-                    <p>But when shot real her. Chamber her one visite removal six
-                        sending himself boys scot exquisite existend an </p>
-                    <p>But when shot real her hamber her </p>
+                    <a href=""> <img src="storage/images/logo/logo-dark.png" alt=""> </a>
+                    <p>{{$configures['slogan'] ?? ''}} </p>
+                    <p>{{$configures['description'] ?? ''}} </p>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-xl-4">
                 <div class="single-footer-widget footer_2">
-                    <h4>Newsletter</h4>
-                    <p>Stay updated with our latest trends Seed heaven so said place winged over given forth fruit.
-                    </p>
-                    <form action="#">
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder='Enter email address'
-                                    onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Enter email address'">
-                                <div class="input-group-append">
-                                    <button class="btn btn_1" type="button"><i class="ti-angle-right"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="social_icon">
-                        <a href="#"> <i class="ti-facebook"></i> </a>
-                        <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                        <a href="#"> <i class="ti-instagram"></i> </a>
-                        <a href="#"> <i class="ti-skype"></i> </a>
-                    </div>
+                    <h4>@lang('Posts')</h4>
+                    <ul class="list">
+                        @foreach ($postTypes as $type)
+                        <li><a href="{{route('guest.posts.type', $type->id)}}">@lang($type->name)</a></li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 col-md-4">
                 <div class="single-footer-widget footer_2">
-                    <h4>Contact us</h4>
+                    <h4>@lang('Contact')</h4>
                     <div class="contact_info">
-                        <p><span> Address :</span> Hath of it fly signs bear be one blessed after </p>
-                        <p><span> Phone :</span> +2 36 265 (8060)</p>
-                        <p><span> Email : </span>info@colorlib.com </p>
+                        <p><span> @lang('Address') :</span> {{$configures['address'] ?? ''}} </p>
+                        <p><span> @lang('Phone') :</span> {{$configures['tel'] ?? ''}}</p>
+                        <p><span> @lang('Email') : </span>{{$configures['email'] ?? ''}} </p>
+                    </div>
+                    <div class="social_icon">
+                        @if(isset($configures['facebook']))
+                        <a target="_blank" href="{{$configures['facebook']}}"> <i class="ti-facebook"></i> </a>
+                        @endif
+                        @if(isset($configures['youtube']))
+                        <a target="_blank" href="{{$configures['youtube']}}"> <i class="ti-youtube"></i> </a>
+                        @endif
                     </div>
                 </div>
             </div>

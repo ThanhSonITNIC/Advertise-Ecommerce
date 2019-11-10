@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Materials')
+@endsection
+
 @section('body')
 
 @include('admin.layouts.alert')
@@ -22,7 +26,7 @@
     <div class="col-xs-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Materials</h4>
+                <h4 class="card-title">@lang('Materials')</h4>
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">

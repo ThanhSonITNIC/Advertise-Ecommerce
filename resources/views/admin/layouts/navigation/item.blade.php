@@ -11,7 +11,7 @@
 <li class="{{isset($disabled) ? 'disabled' : null}} nav-item">
     <a href="{{isset($route) ? route($route) : null}}">
         <i class="{{$icon}}"></i>
-        <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">{{$title}}</span>
+        <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">{{__($title)}}</span>
         @if (isset($tag))
             <span class="tag tag tag-primary tag-pill float-xs-right mr-2">{{$tag}}</span>
         @endif
@@ -21,7 +21,7 @@
         @foreach ($sub as $item)
         <li>
             <a href="{{route($subRoute, $item['id'])}}" data-i18n="nav.cards.card_bootstrap" class="menu-item">
-                {{$item['name']}}
+                {{__($item['name'])}}
             </a>
         </li>
         @endforeach
@@ -31,7 +31,7 @@
         @foreach ($sub as $item)
         <li>
             <a href="{{route($item['id'])}}" data-i18n="nav.cards.card_bootstrap" class="menu-item">
-                {{$item['name']}}
+                {{__($item['name'])}}
             </a>
         </li>
         @endforeach

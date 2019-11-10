@@ -3,6 +3,7 @@
 namespace App\File;
 
 use File;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 
 class Image{
@@ -38,6 +39,11 @@ class Image{
     public $height;
 
     /**
+     * Height size
+     */
+    public $ext;
+
+    /**
      * When upload if $isMakeWatermark = true then create watermark
      * 
      * @var boolean
@@ -62,11 +68,12 @@ class Image{
      * @param $width = null
      * @param $height = null
      */
-    public function __construct($path, $name, $width = null, $height = null){
+    public function __construct($path, $name, $width = null, $height = null, $ext = ".png"){
         $this->name = $name;
         $this->path = $path;
         $this->width = $width;
         $this->height = $height;
+        $this->ext = $ext;
     }
 
     /**
@@ -75,7 +82,7 @@ class Image{
      * @return string
      */
     public function path(){
-        return $this->path.'/'.$this->name;
+        return Str::finish($this->path, '/').$this->name.$this->ext;
     }
 
     /**

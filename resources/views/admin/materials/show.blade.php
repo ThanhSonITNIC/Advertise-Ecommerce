@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Material')
+@endsection
+
 @section('body')
 
 @include('admin.layouts.alert')
@@ -55,7 +59,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>@lang('Quantity')</label>
-                                            <input class="form-control" type="number" name="quantity" value="{{old('quantity') ?? $material->quantity}}" min="0" required>
+                                            <input class="form-control" type="number" value="{{old('quantity') ?? $material->quantity}}" min="0" readonly required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -68,7 +72,7 @@
                                                         @if((old('id_unit') ?? $material->id_unit) == $unit->id) 
                                                             selected 
                                                         @endif>
-                                                        {{$unit->name}}
+                                                        @lang($unit->name)
                                                     </option>
                                                 @endforeach
                                             </select>

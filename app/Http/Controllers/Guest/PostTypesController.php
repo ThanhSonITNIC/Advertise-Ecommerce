@@ -11,6 +11,7 @@ use App\Http\Requests\PostTypeCreateRequest;
 use App\Http\Requests\PostTypeUpdateRequest;
 use App\Repositories\PostTypeRepository;
 use App\Validators\PostTypeValidator;
+use App\Criteria\PostCriteria;
 
 /**
  * Class PostTypesController.
@@ -39,6 +40,8 @@ class PostTypesController extends Controller
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+
+        $this->repository->pushCriteria(PostCriteria::class);
     }
 
     /**

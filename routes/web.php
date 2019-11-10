@@ -11,6 +11,11 @@
 |
 */
 
+// configures
+Route::prefix('config')->namespace('Configures')->name('configures.')->group(function(){
+    Route::get('language/{language}', 'LanguageController@change')->name('language');
+});
+
 // auth
 Auth::routes(['verify' => true]);
 Route::post('login', 'Auth\LoginController@login')->name('login');
@@ -29,6 +34,7 @@ Route::prefix('')->namespace('Guest')->middleware('levels')->name('guest.')->gro
 
     Route::get('news', 'NewsController@index')->name('news');
     Route::get('posts/{id}', 'NewsController@show')->name('news.show');
+    Route::get('posts/type/{id}', 'NewsController@type')->name('posts.type');
 
     Route::get('projects', 'ProjectsController@index')->name('projects');
     Route::get('projects/{id}', 'ProjectsController@show')->name('projects.show');
@@ -62,6 +68,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'levels:admin'])->name('
         Route::resource('import-material-logs', 'ImportMaterialLogsController');
 
         Route::get('configures/logo', 'Configures\LogoController@index')->name('configures.logo');
+        Route::get('configures/banner', 'Configures\BannerController@index')->name('configures.banner');
         Route::resource('configures', 'Configures\ConfiguresController');
 
         Route::resource('units', 'UnitsController');
@@ -76,6 +83,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'levels:admin'])->name('
         Route::post('images/post', 'ImagesController@post')->name('post');
         Route::post('images/article', 'ImagesController@article')->name('article');
         Route::post('images/logo', 'ImagesController@logo')->name('logo');
+        Route::post('images/banner', 'ImagesController@banner')->name('banner');
     });
 
 });

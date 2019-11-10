@@ -22,14 +22,12 @@ class MaterialValidator extends LaravelValidator
             'id' => 'required|max:30|alpha_dash|unique:materials,id',
             'name' => 'required',
             'price' => 'required|numeric|min:0',
-            'quantity' => 'required|numeric|min:0',
             'id_unit' => 'required|exists:units,id',
         ],
         ValidatorInterface::RULE_UPDATE => [
             'id' => 'required|max:30|alpha_dash',
             'name' => 'required',
             'price' => 'required|numeric|min:0',
-            'quantity' => 'required|numeric|min:0',
             'id_unit' => 'required|exists:units,id',
         ],
     ];

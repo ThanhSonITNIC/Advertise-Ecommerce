@@ -12,6 +12,7 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Repositories\PostRepository;
 use App\Validators\PostValidator;
 use View;
+use App\Criteria\PostCriteria;
 
 class NewsController extends Controller
 {
@@ -36,6 +37,7 @@ class NewsController extends Controller
         $this->repository = $repository;
         $this->validator  = $validator;
 
+        $this->repository->pushCriteria(PostCriteria::class);
         View::share('highlightPosts', $this->repository->highlights());
     }
 
@@ -119,6 +121,28 @@ class NewsController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $posts = $this->repository->policies();
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'data' => $posts,
+            ]);
+        }
+
+        return view('front.posts.index', compact('posts'));
+    }
+
+    /**
+     * Display a listing of the resource by type.
+     *
+     * @param $id type
+     * @return \Illuminate\Http\Response
+     */
+    public function type($id)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+
+        $posts = $this->repository->type($id);
 
         if (request()->wantsJson()) {
 

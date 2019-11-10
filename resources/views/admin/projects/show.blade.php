@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Project')
+@endsection
+
 @section('body')
 
 @include('admin.layouts.alert')
@@ -162,7 +166,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Materials</h4>
+                    <h4 class="card-title">@lang('Materials')</h4>
                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -182,11 +186,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th class='text-nowrap'>Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Unit</th>
-                                    <th>Description</th>
+                                    <th class='text-nowrap'>@lang('Name')</th>
+                                    <th>@lang('Price')</th>
+                                    <th>@lang('Quantity')</th>
+                                    <th>@lang('Unit')</th>
+                                    <th>@lang('Description')</th>
                                 </tr>
                             </thead>
                             <tbody id='result'>
@@ -212,33 +216,33 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
-                                                    <label class="modal-title text-text-bold-600" id="myModalLabel33">Material</label>
+                                                    <label class="modal-title text-text-bold-600" id="myModalLabel33">@lang('Material')</label>
                                                 </div>
                                                 <form action="{{route('admin.project-materials.update', $material->id)}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="modal-body">
                                                         <input type="hidden" name="id_material" value="{{$material->id_material}}">
-                                                        <label>Name </label>
+                                                        <label>@lang('Name') </label>
                                                         <div class="form-group">
                                                             <a class="form-control" href="{{route('admin.materials.show', $material->id_material)}}">{{$material->material->name}}</a>
                                                         </div>
-                                                        <label>Price </label>
+                                                        <label>@lang('Price') </label>
                                                         <div class="form-group">
                                                             <input type="number" name="price" step="0.001" min="0" class="form-control" value="{{$material->price}}" required>
                                                         </div>
-                                                        <label>Quantity </label>
+                                                        <label>@lang('Quantity') </label>
                                                         <div class="form-group">
                                                             <input type="number" name="quantity" min="0" class="form-control" value="{{$material->quantity}}" required>
                                                         </div>
-                                                        <label>Description </label>
+                                                        <label>@lang('Description') </label>
                                                         <div class="form-group">
                                                             <input type="text" name="description" class="form-control" value="{{$material->description}}">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">@lang('Close')</button>
+                                                        <button type="submit" class="btn btn-outline-primary">@lang('Save')</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -259,34 +263,34 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <label class="modal-title text-text-bold-600" id="myModalLabel33">Add material</label>
+                            <label class="modal-title text-text-bold-600" id="myModalLabel33">@lang('Add material')</label>
                         </div>
                         <form action="{{route('admin.project-materials.store')}}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <input type="text" name="id_project" hidden value="{{$project->id}}">
                                 
-                                <label>Material </label>
+                                <label>@lang('Material') </label>
                                 <div class="form-group">
                                     <select class="selectpicker form-control" name="id_material" id="material" data-live-search="true" title="Select a material" data-hide-disabled="true" data-size="10" required></select>
                                 </div>
 
-                                <label>Price </label>
+                                <label>@lang('Price') </label>
                                 <div class="form-group">
                                     <input type="number" name="price" min="0" step="0.001" class="form-control" required>
                                 </div>
-                                <label>Quantity </label>
+                                <label>@lang('Quantity') </label>
                                 <div class="form-group">
                                     <input type="number" name="quantity" min="0" class="form-control" required>
                                 </div>
-                                <label>Description </label>
+                                <label>@lang('Description') </label>
                                 <div class="form-group">
                                     <input type="text" name="description" class="form-control">
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-outline-primary">Add</button>
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">@lang('Close')</button>
+                                <button type="submit" class="btn btn-outline-primary">@lang('Add')</button>
                             </div>
                         </form>
                     </div>

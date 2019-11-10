@@ -10,6 +10,7 @@ use App\Entities\ProjectType;
 use App\Entities\Unit;
 use App\Entities\Level;
 use App\Entities\UserStatus;
+use App\Entities\Configure;
 
 class Levels
 {
@@ -41,6 +42,12 @@ class Levels
         View::share('postTypes', PostType::all());
         View::share('projectTypes', ProjectType::all());
         View::share('units', Unit::all());
+
+        $configs = Configure::all()->mapWithKeys(function ($item) {
+            return [$item['key'] => $item['value']];
+        });
+        View::share('configures', $configs->all());
+
 
         return $next($request);
     }

@@ -14,7 +14,8 @@ class Logo{
         return[
             new Image('storage/images/logo','logo-light', 117, 25),
             new Image('storage/images/logo', 'logo-dark', 117, 25),
-            new Image('storage/images/logo', 'logo-small', 32, 18)
+            new Image('storage/images/logo', 'logo-small', 32, 18),
+            new Image('storage/images/logo', 'favicon', 47, 46)
         ];
     }
 }

@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head>
+<head >
     <base href="{{asset('')}}">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @yield('meta')
     <title>@yield('title')</title>
-    <link rel="icon" href="/front_assets/img/favicon.png">
+    <link rel="icon" href="storage/images/logo/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/front_assets/css/bootstrap.min.css">
     <!-- animate CSS -->

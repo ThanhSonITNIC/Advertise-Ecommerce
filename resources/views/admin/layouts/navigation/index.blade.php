@@ -2,7 +2,7 @@
 <div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
     <!-- main menu header-->
     <div class="main-menu-header">
-        <input type="text" placeholder="Search" id="menu_search" class="menu-search form-control round" />
+        <input type="text" placeholder="@lang('Search')" id="menu_search" class="menu-search form-control round" />
     </div>
     <!-- / main menu header-->
     <!-- main menu content-->
@@ -89,6 +89,7 @@
                     'icon' => 'icon-android-settings',
                     'sub' => [
                         ['id' => 'admin.configures.logo', 'name' => 'Logo'],
+                        ['id' => 'admin.configures.banner', 'name' => 'Banner'],
                         ['id' => 'admin.configures.index', 'name' => 'Orthers'],
                     ],
                 ]

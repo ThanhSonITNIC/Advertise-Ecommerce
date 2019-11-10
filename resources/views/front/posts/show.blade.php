@@ -48,7 +48,6 @@
                 <div class="navigation-top">
                     <div class="d-sm-flex justify-content-between text-center">
                         <div class="col-sm-4 text-center my-2 my-sm-0">
-                        <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
                         </div>
                         <ul class="social-icons">
                             <li>
@@ -62,7 +61,7 @@
                 <div class="blog_right_sidebar">
                     @include('front.posts.layouts.menu')
                     <aside class="single_sidebar_widget tag_cloud_widget">
-                        <h4 class="widget_title">Tags</h4>
+                        <h4 class="widget_title">@lang('Tags')</h4>
                         <ul class="list">
                             @foreach (explode(',', $post->tags) as $tag)
                             <li>

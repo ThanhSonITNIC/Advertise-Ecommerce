@@ -1,7 +1,7 @@
 @extends('front.layouts.main')
 
-@section('css')
-    
+@section('title')
+{{config('app.name')}}
 @endsection
 
 @section('body')
@@ -13,14 +13,10 @@
             <div class="col-lg-6 col-xl-6">
                 <div class="banner_text">
                     <div class="banner_text_iner">
-                        <h5>Every child yearns to learn</h5>
-                        <h1>Making Your Childs
-                            World Better</h1>
-                        <p>Replenish seasons may male hath fruit beast were seas saw you arrie said man beast whales
-                            his void unto last session for bite. Set have great you'll male grass yielding yielding
-                            man</p>
-                        <a href="#" class="btn_1">View Course </a>
-                        <a href="#" class="btn_2">Get Started </a>
+                        <h1>{{$configures['slogan'] ?? ''}}</h1>
+                        <p>{{$configures['description'] ?? ''}}</p>
+                        <a href="{{route('guest.projects')}}" class="btn_1">@lang('View projects') </a>
+                        <a href="{{route('guest.contact')}}" class="btn_2">@lang('Contact') </a>
                     </div>
                 </div>
             </div>
@@ -37,8 +33,8 @@
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
-                    <p>Projects</p>
-                    <h2><a href="{{route('guest.projects.type', $type->id)}}">{{$type->name}}</a></h2>
+                    <p>@lang('Projects')</p>
+                    <h2><a href="{{route('guest.projects.type', $type->id)}}">@lang($type->name)</a></h2>
                 </div>
             </div>
         </div>
@@ -60,8 +56,8 @@
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
-                    <p>News</p>
-                    <h2><a href="{{route('guest.news')}}">Highlights</a></h2>
+                    <p>@lang('News')</p>
+                    <h2><a href="{{route('guest.news')}}">@lang('Highlights')</a></h2>
                 </div>
             </div>
         </div>

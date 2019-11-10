@@ -6,13 +6,12 @@
 <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Project Dashboard - Robust Free Bootstrap Admin Template</title>
+<title>@yield('title')</title>
 <link rel="apple-touch-icon" sizes="60x60" href="admin_assets/app-assets/images/ico/apple-icon-60.png">
 <link rel="apple-touch-icon" sizes="76x76" href="admin_assets/app-assets/images/ico/apple-icon-76.png">
 <link rel="apple-touch-icon" sizes="120x120" href="admin_assets/app-assets/images/ico/apple-icon-120.png">
 <link rel="apple-touch-icon" sizes="152x152" href="admin_assets/app-assets/images/ico/apple-icon-152.png">
-<link rel="shortcut icon" type="image/x-icon" href="admin_assets/app-assets/images/ico/favicon.ico">
-<link rel="shortcut icon" type="image/png" href="admin_assets/app-assets/images/ico/favicon-32.png">
+<link rel="shortcut icon" type="image/png" href="storage/images/logo/favicon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">

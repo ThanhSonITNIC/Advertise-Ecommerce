@@ -1,7 +1,7 @@
 @extends('front.layouts.main')
 
-@section('css')
-    
+@section('title')
+@lang('Projects')
 @endsection
 
 @section('body')

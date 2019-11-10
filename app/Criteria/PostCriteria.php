@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Criteria\Customer;
+namespace App\Criteria;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class ProjectCriteria.
+ * Class PostCriteria.
  *
- * @package namespace App\Criteria\Customer;
+ * @package namespace App\Criteria;
  */
-class ProjectCriteria implements CriteriaInterface
+class PostCriteria implements CriteriaInterface
 {
     /**
      * Apply criteria in query repository
@@ -22,7 +22,6 @@ class ProjectCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        $model = $model->where('id_customer', \Auth::id());
-        return $model;
+        return $model->where('published', true);
     }
 }

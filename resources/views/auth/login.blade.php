@@ -1,5 +1,9 @@
 @extends('auth.main')
 
+@section('title')
+@lang('Login')
+@endsection
+
 @section('body')
 <div class="app-content content container-fluid">
     <div class="content-wrapper">
@@ -11,7 +15,7 @@
                     <div class="card border-grey border-lighten-3 m-0">
                         <div class="card-header no-border">
                             <div class="card-title text-xs-center">
-                                <div class="p-1"><img src="storage/images/logo/logo-dark"
+                                <div class="p-1"><img src="storage/images/logo/logo-dark.png"
                                         alt="branding logo"></div>
                             </div>
                             <h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2">

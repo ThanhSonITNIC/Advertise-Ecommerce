@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Users')
+@endsection
+
 @section('body')
 
 @include('admin.layouts.alert')
@@ -21,7 +25,7 @@
     <div class="col-xs-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title">@lang('Users')</h4>
                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -36,11 +40,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th class='text-nowrap'>Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
-                                <th>Address</th>
-                                <th>Status</th>
+                                <th class='text-nowrap'>@lang('Name')</th>
+                                <th>@lang('Email')</th>
+                                <th>@lang('Telephone')</th>
+                                <th>@lang('Address')</th>
+                                <th>@lang('Status')</th>
                             </tr>
                         </thead>
                         <tbody id='result'>

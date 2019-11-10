@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="index.html"> <img src="/front_assets/img/logo.png" alt="logo"> </a>
+                    <a class="navbar-brand" href=""> <img src="storage/images/logo/logo-dark.png" alt="logo"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -15,33 +15,30 @@
                         id="navbarSupportedContent">
                         <ul class="navbar-nav align-items-center">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('guest.home')}}">Trang chủ</a>
+                                <a class="nav-link" href="{{route('guest.home')}}">@lang('Home')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('guest.about')}}">Giới thiệu</a>
+                                <a class="nav-link" href="{{route('guest.about')}}">@lang('About us')</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle dropdown-click" href="{{route('guest.projects')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dự án
+                                        @lang('Project')
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @foreach ($projectTypes as $type)
-                                        <a class="dropdown-item" href="{{route('guest.projects.type', $type->id)}}">{{$type->name}}</a>
+                                        <a class="dropdown-item" href="{{route('guest.projects.type', $type->id)}}">@lang($type->name)</a>
                                     @endforeach
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('guest.news')}}">Tin tức</a>
+                                <a class="nav-link" href="{{route('guest.news')}}">@lang('News')</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{route('guest.policies')}}">Chính sách</a>
+                                    <a class="nav-link" href="{{route('guest.policies')}}">@lang('Policy')</a>
                                 </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('guest.contact')}}">Liên hệ</a>
+                                <a class="nav-link" href="{{route('guest.contact')}}">@lang('Contact')</a>
                             </li>
-                            {{-- <li class="d-none d-lg-block">
-                                <a class="btn_1" href="#"><i class="ti-search"></i></a>
-                            </li> --}}
                         </ul>
                     </div>
                 </nav>

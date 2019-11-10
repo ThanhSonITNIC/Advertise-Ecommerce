@@ -1,18 +1,18 @@
 @extends('admin.layouts.main')
 
 @section('title')
-@lang('Logo')
+@lang('Banner')
 @endsection
 
 @section('body')
 
 <div class="row match-height">
-    @foreach ($logos as $logo)
+    @foreach ($images as $image)
         <div class="col-md-4">
             @php
                 $data = [
-                    'name' => $logo->name,
-                    'image' => $logo->path(),
+                    'name' => $image->name,
+                    'image' => $image->path(),
                 ];
             @endphp
 
@@ -25,8 +25,8 @@
 
 @section('script')
 
-@foreach ($logos as $logo)
-    @include('admin.layouts.components.image-upload', ['url' => route('admin.upload.logo'), 'name' => $logo->name])
+@foreach ($images as $image)
+    @include('admin.layouts.components.image-upload', ['url' => route('admin.upload.banner'), 'name' => $image->name])
 @endforeach
     
 @endsection

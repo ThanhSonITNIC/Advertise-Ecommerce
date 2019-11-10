@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Material')
+@endsection
+
 @section('body')
 
 @include('admin.layouts.alert')
@@ -24,13 +28,13 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>@lang('ID')</label>
                                             <input class="form-control" type="text" name="id" maxlength="30" value="{{old('id')}}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>@lang('Name')</label>
                                             <input type="text" class="form-control" name="name" value="{{old('name')}}" required>
@@ -38,19 +42,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>@lang('Price')</label>
                                             <input class="form-control" type="number" step="0.001" name="price" value="{{old('price')}}" min="0" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>@lang('Quantity')</label>
-                                            <input class="form-control" type="number" name="quantity" value="{{old('quantity') ?? 0}}" min="0" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>@lang('Unit')</label>
                                             <select name="id_unit" class="form-control" required>
@@ -64,7 +62,7 @@
                                                             selected 
                                                             @endif
                                                         @endif>
-                                                        {{$unit->name}}
+                                                        @lang($unit->name)
                                                     </option>
                                                 @endforeach
                                             </select>

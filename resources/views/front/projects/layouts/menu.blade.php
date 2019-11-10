@@ -9,12 +9,12 @@
                 </div>
             </div>
         </div>
-        <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">Search</button>
+        <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">@lang('Search')</button>
     </form>
     </aside>
 
 <aside class="single_sidebar_widget post_category_widget">
-    <h4 class="widget_title">Category</h4>
+    <h4 class="widget_title">@lang('Category')</h4>
     <ul class="list cat-list">
         @foreach ($projectTypes as $type)
         <li>
@@ -27,7 +27,7 @@
 </aside>
 
 <aside class="single_sidebar_widget popular_post_widget">
-    <h3 class="widget_title">Highlights</h3>
+    <h3 class="widget_title">@lang('Highlights')</h3>
     @foreach ($highlightProjects as $project)
     <div class="media post_item">
         <img src="{{$project->watermark()}}" alt="{{$project->name}}" style="max-width: 25%">

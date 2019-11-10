@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('title')
+@lang('Project types')
+@endsection
+
 @section('body')
 
 @include('admin.layouts.alert')

@@ -62,7 +62,7 @@
                 <div class="blog_right_sidebar">
                     @include('front.projects.layouts.menu')
                     <aside class="single_sidebar_widget tag_cloud_widget">
-                        <h4 class="widget_title">Tags</h4>
+                        <h4 class="widget_title">@lang('Tags')</h4>
                         <ul class="list">
                             @foreach (explode(',', $project->tags) as $tag)
                             <li>
