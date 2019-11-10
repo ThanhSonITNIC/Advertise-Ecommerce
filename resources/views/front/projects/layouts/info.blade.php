@@ -6,7 +6,7 @@
     @if($project->finished_at)
     <li><i class="fa fa-calendar-check-o"></i> {{$project->finished_at}}</li>
     @endif
-    @if($project->budget)
-    <li><i class="fa fa-usd"></i> {{$project->budget}}</li>
+    @if($project->subtotal)
+    <li><i class="fa fa-usd"></i> {{$project->subtotal}}</li>
     @endif
 </ul>

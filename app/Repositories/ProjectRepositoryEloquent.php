@@ -18,7 +18,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     protected $fieldSearchable = [
         'id' => '=',
         'name' => 'like',
-        'budget' => '=',
+        'subtotal' => '=',
         'customer.name' => 'like',
         'created_at' => 'like',
     ];

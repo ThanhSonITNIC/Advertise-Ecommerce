@@ -9,7 +9,7 @@
         ['value' => '', 'display' => 'All'],
         ['value' => 'id', 'display' => 'Id'],
         ['value' => 'name', 'display' => 'Name'],
-        ['value' => 'budget', 'display' => 'Budget'],
+        ['value' => 'subtotal', 'display' => 'Subtotal'],
         ['value' => 'customer.name', 'display' => 'Customer'],
         ['value' => 'created_at', 'display' => 'Created at'],
     ];
@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Budget</th>
+                                <th>Subtotal</th>
                                 <th class='text-nowrap'>Customer</th>
                                 <th>Created at</th>
                             </tr>
@@ -47,7 +47,7 @@
                                 <tr data-id="{{$project->id}}">
                                     <th scope="row">{{$index+1}}</th>
                                     <th class='text-nowrap'>{{$project->name}}</th>
-                                    <td class='text-nowrap'>{{$project->budget}}</td>
+                                    <td class='text-nowrap'>{{$project->subtotal}}</td>
                                     <td class='text-nowrap'>{{$project->customer ? $project->customer->name : null}}</td>
                                     <td class='text-nowrap'>{{$project->created_at}}</td>
                                 </tr>

@@ -29,7 +29,7 @@ class Project extends Model implements Transformable
         'description',
         'image',
         'id_customer',
-        'budget',
+        'subtotal',
         'highlight',
         'start_at',
         'finish_at',

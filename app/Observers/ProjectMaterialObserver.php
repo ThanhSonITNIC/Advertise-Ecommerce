@@ -15,9 +15,9 @@ class ProjectMaterialObserver
     public function created(ProjectMaterial $projectMaterial)
     {
         // update total project
-        $current_total = $projectMaterial->project->budget;
+        $current_total = $projectMaterial->project->subtotal;
         $total = $current_total + ($projectMaterial->price * $projectMaterial->quantity);
-        $projectMaterial->project->update(['budget' => $total]);
+        $projectMaterial->project->update(['subtotal' => $total]);
 
         // update quantity material
         $current_quantity = $projectMaterial->material->quantity;
@@ -35,11 +35,11 @@ class ProjectMaterialObserver
     {
         if($projectMaterial->isDirty('price') || $projectMaterial->isDirty('quantity')){
             // update total project
-            $current_total = $projectMaterial->project->budget;
+            $current_total = $projectMaterial->project->subtotal;
             $new = $projectMaterial->price * $projectMaterial->quantity;
             $old = $projectMaterial->getOriginal('price') * $projectMaterial->getOriginal('quantity');
             $total = $current_total + ($new - $old);
-            $projectMaterial->project->update(['budget' => $total]);
+            $projectMaterial->project->update(['subtotal' => $total]);
 
             // update quantity material
             if($projectMaterial->isDirty('quantity')){
@@ -60,9 +60,9 @@ class ProjectMaterialObserver
      */
     public function deleted(ProjectMaterial $projectMaterial)
     {
-        $current_total = $projectMaterial->project->budget;
+        $current_total = $projectMaterial->project->subtotal;
         $total = $current_total - ($projectMaterial->price * $projectMaterial->quantity);
-        $projectMaterial->project->update(['budget' => $total]);
+        $projectMaterial->project->update(['subtotal' => $total]);
     }
 
     /**

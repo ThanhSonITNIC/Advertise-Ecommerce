@@ -23,7 +23,7 @@ class CreateProjectsTable extends Migration
 			$table->longText('content')->nullable();
 			$table->text('image')->nullable();
 			$table->unsignedInteger('id_customer')->nullable();
-			$table->decimal('budget', 18, 3)->nullable();
+			$table->decimal('subtotal', 18, 3)->nullable();
 			$table->boolean('highlight');
 			$table->date('start_at')->nullable();
 			$table->date('finish_at')->nullable();
